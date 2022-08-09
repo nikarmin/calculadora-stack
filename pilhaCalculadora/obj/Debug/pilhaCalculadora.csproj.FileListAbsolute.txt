@@ -1,0 +1,11 @@
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe.config
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\bin\Debug\pilhaCalculadora.pdb
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.AssemblyReference.cache
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.SuggestedBindingRedirects.cache
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.frmCalculadora.resources
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.Properties.Resources.resources
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.GenerateResource.cache
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.CoreCompileInputs.cache
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.exe
+E:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.pdb
