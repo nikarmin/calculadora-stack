@@ -12,7 +12,7 @@ namespace pilhaCalculadora
 {
     public partial class frmCalculadora : Form
     {
-        //PilhaLista<> umaPilha;
+        PilhaLista<char> umaPilha;
         public frmCalculadora()
         {
             InitializeComponent();
@@ -20,11 +20,13 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
-            // testando DOIDEIRAS
-            if ("1234567890-+*/.".Contains(txtVisor.Text))
+            char ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
+
+            if (!"1234567890-+*/.".Contains(ultimaLetra))
             {
-                MessageBox.Show("aaaaaaaaaa");
-                //ConverterInfixaParaPosfixa(txtVisor.Text);
+                txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
+                MessageBox.Show("Caractere inválido!", "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -36,10 +38,24 @@ namespace pilhaCalculadora
                 return false;
         }
 
+        bool TemPrecedencia(NoLista<char> topo, char simbolo)
+        {
+
+            switch (simbolo)
+            {
+                case '+':
+                    if (topo.Info == '+' || topo.Info == '-')
+                        return true;
+                    else
+                        return false;
+                    break;
+            }
+        }
+
         string ConverterInfixaParaPosfixa(string cadeiaLida)
         {
             string resultado = "";
-            //umaPilha = new PilhaLista();
+            umaPilha = new PilhaLista<char>();
 
             for (int x = 0; x < cadeiaLida.Length; x++)
             {
@@ -51,7 +67,7 @@ namespace pilhaCalculadora
                 else
                 {
                     bool parar = false;
-                    //while (!parar && /*!umaPilha.EstaVazia*/)
+                    while (!parar && !umaPilha.EstaVazia /*&& TemPrecedencia(umaPilha.OTopo, simboloLido)*/)
                 }
             }
 
