@@ -20,13 +20,14 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
+            //if (txtVisor.Text.Length != 0)
             char ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
 
-            if (!"1234567890-+*/.".Contains(ultimaLetra))
+            if (!"1234567890-+*/.()".Contains(ultimaLetra))
             {
                 txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
                 MessageBox.Show("Caractere inválido!", "Erro",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -36,6 +37,67 @@ namespace pilhaCalculadora
                 return true;
             else
                 return false;
+        }
+
+        bool EhAbertura(char caracter)
+        {
+            return "{[(".Contains(caracter);
+        }
+        bool EhFechamento(char caracter)
+        {
+            return "}])".Contains(caracter);
+        }
+
+        bool Combinam(char anterior, char atual)
+        {
+            return anterior == '{' && atual == '}' ||
+                   anterior == '(' && atual == ')' ||
+                   anterior == '[' && atual == ']';
+        }
+
+        bool Balanceada()
+        {
+            PilhaLista<char> pilhaBalanceamento = new PilhaLista<char>();
+            string expressao = txtVisor.Text;
+            bool estaBalanceada = true;
+            int abertura = 0;
+            int fechamento = 0;
+
+            for (int i = 0; i < expressao.Length && estaBalanceada; i++)
+            {
+                char caracterLido = expressao[i];
+                if (EhAbertura(caracterLido))
+                {
+                    pilhaBalanceamento.Empilhar(caracterLido);
+                    abertura++;
+                }
+
+                else // caracter é de fechamento?
+                    if (EhFechamento(caracterLido))
+                {
+                    char aberturaAnterior = ' ';
+                    fechamento++;
+
+                    try
+                    {
+                        aberturaAnterior = pilhaBalanceamento.Desempilhar();
+                    }
+                    catch (Exception ex)
+                    {
+                        estaBalanceada = false;
+                    }
+                    if (!Combinam(aberturaAnterior, caracterLido))
+                        estaBalanceada = false;
+                }
+
+                else
+                    estaBalanceada = false;
+            }
+
+            if (abertura != fechamento)
+                return false;
+
+            return estaBalanceada;
         }
 
         bool TemPrecedencia(char topo, char simboloLido)
@@ -81,7 +143,7 @@ namespace pilhaCalculadora
 
         string ConverterInfixaParaPosfixa(string cadeiaLida)
         {
-            string resultado = "";
+            string resultado = " ";
             umaPilha = new PilhaLista<char>();
 
             for (int x = 0; x < cadeiaLida.Length; x++)
@@ -94,6 +156,7 @@ namespace pilhaCalculadora
                 else
                 {
                     bool parar = false;
+
                     while (!parar && !umaPilha.EstaVazia && TemPrecedencia(umaPilha.OTopo(), simboloLido))
                     {
                         // se o topo da pilha é "mais importante" que o simboloLido, desempilhamos o topo,
@@ -110,5 +173,17 @@ namespace pilhaCalculadora
 
             return resultado;
         }
+
+        private void btnIgual_Click(object sender, EventArgs e)
+        {
+            if (Balanceada())
+            {
+                MessageBox.Show("Equação balanceada!");
+            }
+            else
+                MessageBox.Show("A equação não está balanceada! Verifique os parênteses!", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }
+

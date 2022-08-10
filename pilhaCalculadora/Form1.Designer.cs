@@ -56,7 +56,7 @@
             // txtVisor
             // 
             this.txtVisor.Location = new System.Drawing.Point(13, 13);
-            this.txtVisor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtVisor.Margin = new System.Windows.Forms.Padding(4);
             this.txtVisor.Name = "txtVisor";
             this.txtVisor.Size = new System.Drawing.Size(401, 26);
             this.txtVisor.TabIndex = 0;
@@ -241,6 +241,7 @@
             this.btnIgual.TabIndex = 20;
             this.btnIgual.Text = "=";
             this.btnIgual.UseVisualStyleBackColor = true;
+            this.btnIgual.Click += new System.EventHandler(this.btnIgual_Click);
             // 
             // btnLimpar
             // 
@@ -290,7 +291,7 @@
             this.Controls.Add(this.txtResultado);
             this.Controls.Add(this.txtVisor);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCalculadora";
             this.Text = "Calculadora";
             this.ResumeLayout(false);
