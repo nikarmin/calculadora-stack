@@ -38,18 +38,45 @@ namespace pilhaCalculadora
                 return false;
         }
 
-        bool TemPrecedencia(NoLista<char> topo, char simbolo)
+        bool TemPrecedencia(char topo, char simboloLido)
         {
+            byte pTopo        = VerificarValorDePrecedencia(topo);
+            byte pSimboloLido = VerificarValorDePrecedencia(simboloLido);
+
+            if (pTopo < pSimboloLido)
+                return true;
+            else if (pTopo == pSimboloLido)
+                return true;
+
+            return false;
+        }
+
+        byte VerificarValorDePrecedencia(char simbolo)
+        {
+            byte precedencia = 0; 
 
             switch (simbolo)
             {
+                case '(':
+                    precedencia = 0;
+                    break;
+                case '^':
+                    precedencia = 1;
+                    break;
+                case '*':
+                case '/':
+                    precedencia = 2;
+                    break;
                 case '+':
-                    if (topo.Info == '+' || topo.Info == '-')
-                        return true;
-                    else
-                        return false;
+                case '-':
+                    precedencia = 3;
+                    break;
+                case ')':
+                    precedencia = 4;
                     break;
             }
+
+            return precedencia;
         }
 
         string ConverterInfixaParaPosfixa(string cadeiaLida)
@@ -67,7 +94,17 @@ namespace pilhaCalculadora
                 else
                 {
                     bool parar = false;
-                    while (!parar && !umaPilha.EstaVazia /*&& TemPrecedencia(umaPilha.OTopo, simboloLido)*/)
+                    while (!parar && !umaPilha.EstaVazia && TemPrecedencia(umaPilha.OTopo(), simboloLido))
+                    {
+                        // se o topo da pilha é "mais importante" que o simboloLido, desempilhamos o topo,
+                        // colocando ele na expressão pós-fixa e empilhamos o simbolo lido
+                        if (umaPilha.OTopo() == '(')
+                            umaPilha.Desempilhar();
+                        else
+                            resultado += umaPilha.Desempilhar();
+
+                        umaPilha.Empilhar(simboloLido);
+                    }
                 }
             }
 
