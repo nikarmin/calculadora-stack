@@ -204,7 +204,7 @@ namespace pilhaCalculadora
                 }
 
                 byte contador = 0;
-                foreach(Char ind in numero)
+                foreach (Char ind in numero)
                     vetorValores[contador++] = ind;
             }
             else
