@@ -13,8 +13,8 @@ namespace pilhaCalculadora
     /*
         Estrutura de Dados II - Projeto Calculadora em Pilha
 
-        Nicoli Ferreira - 21689
         Julia Flausino da Silva - 21241
+        Nicoli Ferreira - 21689
         Professor: Francisco da Fonseca Rodrigues
      */
 
@@ -22,6 +22,8 @@ namespace pilhaCalculadora
     {
         PilhaLista<char> umaPilha;
         char[] vetorValores;
+        int[] vetorLetras;
+
         public frmCalculadora()
         {
             InitializeComponent();
@@ -189,6 +191,7 @@ namespace pilhaCalculadora
                 // Criamos um vetor com o tamanho do txtVisor
                 // Verificar quantos operadores tem na expressão?
 
+                char[] vetorNumeros;
                 vetorValores = new char[txtVisor.TextLength];
                 string numero = "";
 
@@ -202,10 +205,42 @@ namespace pilhaCalculadora
                         vetorValores[i] = txtVisor.Text[i];
                     }*/
                 }
-
                 byte contador = 0;
+                vetorNumeros = new char[numero.Length];
+
                 foreach (Char ind in numero)
-                    vetorValores[contador++] = ind;
+                    vetorNumeros[contador++] = ind;
+
+                vetorLetras = new int[contador];
+
+                // doideira para atribuir letras (não consegui)
+
+                byte cont = 0;
+                char a = 'A';
+
+                /*for (int x = 1; x < vetorNumeros.Length; x++)
+                {
+                    for (int y = 0; y < vetorNumeros.Length; y++)
+                    {
+                        if (vetorNumeros[y] == vetorNumeros[x])
+                        {
+                            vetorLetras[cont] = vetorNumeros[y];
+                        }
+                        else
+                        {
+                            vetorLetras[cont++] = vetorNumeros[y];
+                        }
+                    }*/
+
+                    /*for (y = x + 1; y < vetorNumeros.Length; y++)
+                    {
+                        if (vetorNumeros[x] != vetorNumeros[y])
+                            vetorLetras[x] = int.Parse(a.ToString() + 1);
+                        else 
+                            vetorLetras[x++] = int.Parse(a.ToString());
+                    }
+                    y--;*/
+                }
             }
             else
                 MessageBox.Show("A equação não está balanceada! Verifique os parênteses!", "Erro",
