@@ -35,9 +35,10 @@ namespace pilhaCalculadora
 
             if (txtVisor.Text.Length != 0)
             {
+                byte contador = 0;
                 ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
 
-                if (!"1234567890-+*/.()".Contains(ultimaLetra))
+                if (!"1234567890-+*/.()^".Contains(ultimaLetra))
                 {
                     txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
                     MessageBox.Show("Caractere inválido!", "Erro",
@@ -195,56 +196,100 @@ namespace pilhaCalculadora
                 vetorValores = new char[txtVisor.TextLength];
                 string numero = "";
 
-                for (int i = 0; i < txtVisor.TextLength; i++)
+                for (int x = 0; x < txtVisor.TextLength; x++)
                 {
-                    if ("1234567890".Contains(txtVisor.Text[i]))
-                        numero += txtVisor.Text[i];
-                    /*
-                    if ("1234567890".Contains(txtVisor.Text[i]))
-                    {
-                        vetorValores[i] = txtVisor.Text[i];
-                    }*/
+                    vetorValores[x] = txtVisor.Text[x];
                 }
-                byte contador = 0;
-                vetorNumeros = new char[numero.Length];
 
-                foreach (Char ind in numero)
-                    vetorNumeros[contador++] = ind;
+                // JULIA EU VIREI O CORINGA AQUI
+                // EU NAO SEI PROGRAMAR MAIS!!!!!!!!!!!!!
 
-                vetorLetras = new int[contador];
-
-                // doideira para atribuir letras (não consegui)
-
-                byte cont = 0;
-                char a = 'A';
-
-                /*for (int x = 1; x < vetorNumeros.Length; x++)
+                for (byte i = 0; i < txtVisor.TextLength; i++)
                 {
-                    for (int y = 0; y < vetorNumeros.Length; y++)
+                    if ("1234567890".Contains(txtVisor.Text[i]))
                     {
-                        if (vetorNumeros[y] == vetorNumeros[x])
+                        byte contador = 0;
+                        byte ajuda = 0;
+                        //vetorValores[i] = txtVisor.Text[i];
+                        numero += txtVisor.Text[i];
+
+                        contador = i;
+
+                        if (".".Contains(txtVisor.Text[++contador]))
                         {
-                            vetorLetras[cont] = vetorNumeros[y];
+                            numero += txtVisor.Text[contador];
+
+                            ajuda = contador;
+
+                            // AQUI NÃO TÁ PEGANDO O ÚLTIMO NUMERO POR Q SE TIRAR O AJUDA <, ELE VAI TENTAR PROCURAR EM UM INDICE MAIOR Q O TAMANHO DO VETOR
+                            while ("1234567890".Contains(txtVisor.Text[++ajuda]) && (ajuda < (txtVisor.TextLength-1)))
+                            {
+                                numero += txtVisor.Text[ajuda];
+                            }
+
+                            /*while ("1234567890".Contains(txtVisor.Text[++contador]))
+                            {
+                                numero += txtVisor.Text[contador];
+                            }*/
+
+                            //i = ++contador;
+                            i = ajuda;
+                        }
+                    }
+                }
+
+                
+                vetorNumeros = new char[numero.Length];
+                string socorro = "";
+
+                /*for (byte y = 0; y < vetorValores.Length; y++)
+                {
+                    if ("0123456789".Contains(vetorValores[y]))
+                    {
+                        byte sla = y;
+                        if (".".Contains(vetorValores[sla++]))
+                        {
+                            socorro += vetorValores[y]+".";
+
+                            while ("0123456789".Contains(vetorValores[sla]))
+                            {
+                                socorro += vetorValores[sla];
+                                sla++;
+                            }
                         }
                         else
                         {
-                            vetorLetras[cont++] = vetorNumeros[y];
+                            socorro += vetorValores[y];
                         }
-                    }*/
-
-                    /*for (y = x + 1; y < vetorNumeros.Length; y++)
-                    {
-                        if (vetorNumeros[x] != vetorNumeros[y])
-                            vetorLetras[x] = int.Parse(a.ToString() + 1);
-                        else 
-                            vetorLetras[x++] = int.Parse(a.ToString());
                     }
-                    y--;*/
                 }
+
+                foreach (Char indice in numero)
+                    vetorNumeros[contador++] = indice;
+
+
+                vetorLetras = new int[contador];*/
+
             }
             else
                 MessageBox.Show("A equação não está balanceada! Verifique os parênteses!", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void frmCalculadora_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExpo_Click_1(object sender, EventArgs e)
+        {
+            char numero = (sender as Button).Text[0];
+            txtVisor.Text += numero;
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtVisor.Clear();
         }
     }
 }

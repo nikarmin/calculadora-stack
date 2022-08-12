@@ -88,6 +88,7 @@
             this.btnExpo.TabIndex = 3;
             this.btnExpo.Text = "^";
             this.btnExpo.UseVisualStyleBackColor = true;
+            this.btnExpo.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnDivisao
             // 
@@ -97,6 +98,7 @@
             this.btnDivisao.TabIndex = 4;
             this.btnDivisao.Text = "/";
             this.btnDivisao.UseVisualStyleBackColor = true;
+            this.btnDivisao.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnMultiplicacao
             // 
@@ -106,6 +108,7 @@
             this.btnMultiplicacao.TabIndex = 5;
             this.btnMultiplicacao.Text = "*";
             this.btnMultiplicacao.UseVisualStyleBackColor = true;
+            this.btnMultiplicacao.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnSubtracao
             // 
@@ -115,6 +118,7 @@
             this.btnSubtracao.TabIndex = 6;
             this.btnSubtracao.Text = "-";
             this.btnSubtracao.UseVisualStyleBackColor = true;
+            this.btnSubtracao.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnSete
             // 
@@ -124,6 +128,7 @@
             this.btnSete.TabIndex = 7;
             this.btnSete.Text = "7";
             this.btnSete.UseVisualStyleBackColor = true;
+            this.btnSete.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnOito
             // 
@@ -133,6 +138,7 @@
             this.btnOito.TabIndex = 8;
             this.btnOito.Text = "8";
             this.btnOito.UseVisualStyleBackColor = true;
+            this.btnOito.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnNove
             // 
@@ -142,6 +148,7 @@
             this.btnNove.TabIndex = 9;
             this.btnNove.Text = "9";
             this.btnNove.UseVisualStyleBackColor = true;
+            this.btnNove.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnSoma
             // 
@@ -151,6 +158,7 @@
             this.btnSoma.TabIndex = 10;
             this.btnSoma.Text = "+";
             this.btnSoma.UseVisualStyleBackColor = true;
+            this.btnSoma.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnQuatro
             // 
@@ -160,6 +168,7 @@
             this.btnQuatro.TabIndex = 11;
             this.btnQuatro.Text = "4";
             this.btnQuatro.UseVisualStyleBackColor = true;
+            this.btnQuatro.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnCinco
             // 
@@ -169,6 +178,7 @@
             this.btnCinco.TabIndex = 12;
             this.btnCinco.Text = "5";
             this.btnCinco.UseVisualStyleBackColor = true;
+            this.btnCinco.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnSeis
             // 
@@ -178,6 +188,7 @@
             this.btnSeis.TabIndex = 13;
             this.btnSeis.Text = "6";
             this.btnSeis.UseVisualStyleBackColor = true;
+            this.btnSeis.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnDecimal
             // 
@@ -187,6 +198,7 @@
             this.btnDecimal.TabIndex = 14;
             this.btnDecimal.Text = ".";
             this.btnDecimal.UseVisualStyleBackColor = true;
+            this.btnDecimal.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnUm
             // 
@@ -196,6 +208,7 @@
             this.btnUm.TabIndex = 15;
             this.btnUm.Text = "1";
             this.btnUm.UseVisualStyleBackColor = true;
+            this.btnUm.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnDois
             // 
@@ -205,6 +218,7 @@
             this.btnDois.TabIndex = 16;
             this.btnDois.Text = "2";
             this.btnDois.UseVisualStyleBackColor = true;
+            this.btnDois.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnTres
             // 
@@ -214,6 +228,7 @@
             this.btnTres.TabIndex = 17;
             this.btnTres.Text = "3";
             this.btnTres.UseVisualStyleBackColor = true;
+            this.btnTres.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnFechaParenteses
             // 
@@ -223,6 +238,7 @@
             this.btnFechaParenteses.TabIndex = 18;
             this.btnFechaParenteses.Text = ")";
             this.btnFechaParenteses.UseVisualStyleBackColor = true;
+            this.btnFechaParenteses.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnZero
             // 
@@ -232,6 +248,7 @@
             this.btnZero.TabIndex = 19;
             this.btnZero.Text = "0";
             this.btnZero.UseVisualStyleBackColor = true;
+            this.btnZero.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // btnIgual
             // 
@@ -251,6 +268,7 @@
             this.btnLimpar.TabIndex = 21;
             this.btnLimpar.Text = "C";
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnAbreParenteses
             // 
@@ -260,6 +278,7 @@
             this.btnAbreParenteses.TabIndex = 22;
             this.btnAbreParenteses.Text = "(";
             this.btnAbreParenteses.UseVisualStyleBackColor = true;
+            this.btnAbreParenteses.Click += new System.EventHandler(this.btnExpo_Click_1);
             // 
             // frmCalculadora
             // 
@@ -294,6 +313,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCalculadora";
             this.Text = "Calculadora";
+            this.Load += new System.EventHandler(this.frmCalculadora_Load);
+            this.Click += new System.EventHandler(this.btnExpo_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
