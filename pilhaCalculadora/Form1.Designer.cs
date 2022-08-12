@@ -61,6 +61,7 @@
             this.txtVisor.Size = new System.Drawing.Size(401, 26);
             this.txtVisor.TabIndex = 0;
             this.txtVisor.TextChanged += new System.EventHandler(this.txtVisor_TextChanged);
+            this.txtVisor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVisor_KeyDown);
             // 
             // txtResultado
             // 
@@ -82,6 +83,9 @@
             // 
             // btnExpo
             // 
+            this.btnExpo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExpo.Location = new System.Drawing.Point(13, 132);
             this.btnExpo.Name = "btnExpo";
             this.btnExpo.Size = new System.Drawing.Size(97, 45);
@@ -92,6 +96,9 @@
             // 
             // btnDivisao
             // 
+            this.btnDivisao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDivisao.Location = new System.Drawing.Point(116, 132);
             this.btnDivisao.Name = "btnDivisao";
             this.btnDivisao.Size = new System.Drawing.Size(97, 45);
@@ -102,6 +109,9 @@
             // 
             // btnMultiplicacao
             // 
+            this.btnMultiplicacao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMultiplicacao.Location = new System.Drawing.Point(219, 132);
             this.btnMultiplicacao.Name = "btnMultiplicacao";
             this.btnMultiplicacao.Size = new System.Drawing.Size(97, 45);
@@ -112,6 +122,9 @@
             // 
             // btnSubtracao
             // 
+            this.btnSubtracao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSubtracao.Location = new System.Drawing.Point(322, 132);
             this.btnSubtracao.Name = "btnSubtracao";
             this.btnSubtracao.Size = new System.Drawing.Size(97, 45);
@@ -122,6 +135,9 @@
             // 
             // btnSete
             // 
+            this.btnSete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSete.Location = new System.Drawing.Point(13, 183);
             this.btnSete.Name = "btnSete";
             this.btnSete.Size = new System.Drawing.Size(97, 45);
@@ -132,6 +148,9 @@
             // 
             // btnOito
             // 
+            this.btnOito.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOito.Location = new System.Drawing.Point(116, 183);
             this.btnOito.Name = "btnOito";
             this.btnOito.Size = new System.Drawing.Size(97, 45);
@@ -142,6 +161,9 @@
             // 
             // btnNove
             // 
+            this.btnNove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNove.Location = new System.Drawing.Point(219, 183);
             this.btnNove.Name = "btnNove";
             this.btnNove.Size = new System.Drawing.Size(97, 45);
@@ -152,6 +174,9 @@
             // 
             // btnSoma
             // 
+            this.btnSoma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSoma.Location = new System.Drawing.Point(322, 183);
             this.btnSoma.Name = "btnSoma";
             this.btnSoma.Size = new System.Drawing.Size(97, 45);
@@ -162,6 +187,9 @@
             // 
             // btnQuatro
             // 
+            this.btnQuatro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuatro.Location = new System.Drawing.Point(13, 234);
             this.btnQuatro.Name = "btnQuatro";
             this.btnQuatro.Size = new System.Drawing.Size(97, 45);
@@ -172,6 +200,9 @@
             // 
             // btnCinco
             // 
+            this.btnCinco.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCinco.Location = new System.Drawing.Point(116, 234);
             this.btnCinco.Name = "btnCinco";
             this.btnCinco.Size = new System.Drawing.Size(97, 45);
@@ -182,6 +213,9 @@
             // 
             // btnSeis
             // 
+            this.btnSeis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSeis.Location = new System.Drawing.Point(219, 234);
             this.btnSeis.Name = "btnSeis";
             this.btnSeis.Size = new System.Drawing.Size(97, 45);
@@ -192,6 +226,9 @@
             // 
             // btnDecimal
             // 
+            this.btnDecimal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDecimal.Location = new System.Drawing.Point(322, 234);
             this.btnDecimal.Name = "btnDecimal";
             this.btnDecimal.Size = new System.Drawing.Size(97, 45);
@@ -202,6 +239,9 @@
             // 
             // btnUm
             // 
+            this.btnUm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUm.Location = new System.Drawing.Point(13, 285);
             this.btnUm.Name = "btnUm";
             this.btnUm.Size = new System.Drawing.Size(97, 45);
@@ -212,6 +252,9 @@
             // 
             // btnDois
             // 
+            this.btnDois.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDois.Location = new System.Drawing.Point(116, 285);
             this.btnDois.Name = "btnDois";
             this.btnDois.Size = new System.Drawing.Size(97, 45);
@@ -222,6 +265,9 @@
             // 
             // btnTres
             // 
+            this.btnTres.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTres.Location = new System.Drawing.Point(219, 285);
             this.btnTres.Name = "btnTres";
             this.btnTres.Size = new System.Drawing.Size(97, 45);
@@ -232,6 +278,9 @@
             // 
             // btnFechaParenteses
             // 
+            this.btnFechaParenteses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFechaParenteses.Location = new System.Drawing.Point(322, 285);
             this.btnFechaParenteses.Name = "btnFechaParenteses";
             this.btnFechaParenteses.Size = new System.Drawing.Size(97, 45);
@@ -242,6 +291,9 @@
             // 
             // btnZero
             // 
+            this.btnZero.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnZero.Location = new System.Drawing.Point(13, 336);
             this.btnZero.Name = "btnZero";
             this.btnZero.Size = new System.Drawing.Size(97, 45);
@@ -252,6 +304,9 @@
             // 
             // btnIgual
             // 
+            this.btnIgual.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnIgual.Location = new System.Drawing.Point(116, 336);
             this.btnIgual.Name = "btnIgual";
             this.btnIgual.Size = new System.Drawing.Size(97, 45);
@@ -262,6 +317,9 @@
             // 
             // btnLimpar
             // 
+            this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLimpar.Location = new System.Drawing.Point(219, 336);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(97, 45);
@@ -272,6 +330,9 @@
             // 
             // btnAbreParenteses
             // 
+            this.btnAbreParenteses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAbreParenteses.Location = new System.Drawing.Point(322, 336);
             this.btnAbreParenteses.Name = "btnAbreParenteses";
             this.btnAbreParenteses.Size = new System.Drawing.Size(97, 45);
@@ -313,7 +374,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCalculadora";
             this.Text = "Calculadora";
-            this.Load += new System.EventHandler(this.frmCalculadora_Load);
             this.Click += new System.EventHandler(this.btnExpo_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();

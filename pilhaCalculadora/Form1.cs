@@ -38,7 +38,7 @@ namespace pilhaCalculadora
                 byte contador = 0;
                 ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
 
-                if (!"1234567890-+*/.()^".Contains(ultimaLetra))
+                if (!"1234567890-+*/.()^ ".Contains(ultimaLetra))
                 {
                     txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
                     MessageBox.Show("Caractere inválido!", "Erro",
@@ -49,7 +49,7 @@ namespace pilhaCalculadora
 
         bool EhOperador(char simbolo)
         {
-            if ("/*-+()".Contains(simbolo))
+            if ("/*-+()^".Contains(simbolo))
                 return true;
             else
                 return false;
@@ -184,91 +184,79 @@ namespace pilhaCalculadora
             return resultado;
         }
 
+        private string FormarExpressaoInfixa(string expressao)
+        {
+            string expInfx = "";                      // string que será retornada, contendo a expressão infixa com números ao invés de letras
+            List<double> numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
+
+            // percorre a expressão passada como parâmetro
+            for (byte i = 0; i < expressao.Length; i++)
+            {
+                // se o caracter analisado é operador
+                if (EhOperador(expressao[i]))
+                {
+                    expInfx += expressao[i]; // adicionamos ele na expressão infixa
+                }
+
+                else // número ou ponto
+                {
+                    string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
+                                          // pois o operando pode ser composto por mais de um número (ex: 134) ou pode ser um decimal
+                                          // (ex: 12.45) então, temos que verificar se temos mais números depois desse que vão compor
+                                          // esse operando
+
+                    // vamos percorrer a expressão a partir de onde paramos até achar um operador, 
+                    // quando acharmos um operador quer dizer que o 'operando' acabou --- problema: mas e se for o último número da expressão? - até achar o operando ou até terminar a string
+                    // ai n vamos ter um último operador, e se a expressão acabar com um operador? (um parenteses) - só copia
+                    // e se a expressão tiver um operador unário?
+                    byte c = i;
+
+                    while (c != expressao.Length && !EhOperador(expressao[c]))
+                    {
+                        if (expressao[c] == '.')
+                            operando += ',';
+
+                        else
+                            operando += (char)expressao[c];
+
+                        c++;
+                    }
+
+                    // Se o operando tiver um índice maior que 1, ou seja, é composto por +1 número
+                    // Temos que fazer com que o for continue a percorrer até onde ele pegou os números
+                    if (operando.Length > 1)
+                        i = --c;
+
+                    double numero = double.Parse(operando);
+
+                    if (!numeros.Contains(numero))
+                        numeros.Add(numero);
+
+                    expInfx += (char)(65 + numeros.IndexOf(numero));
+
+                }
+            }
+
+            return expInfx;
+        }
+
         private void btnIgual_Click(object sender, EventArgs e)
         {
             // Verifica se a expressão está balanceada
             if (Balanceada())
             {
-                // Criamos um vetor com o tamanho do txtVisor
-                // Verificar quantos operadores tem na expressão?
+                //string exp = "(5+8)*5+7^4";
+                //string exp1 = "(5.2+8)*5.2+7^4";
+                //string exp2 = "6+4*6^356+356";
+                //string expInfx = FormarExpressaoInfixa(exp);
+                //string expInfx2 = FormarExpressaoInfixa(exp2);
+                //string expInfx = FormarExpressaoInfixa(exp1);
 
-                char[] vetorNumeros;
-                vetorValores = new char[txtVisor.TextLength];
-                string numero = "";
+                /*double teste = double.Parse("2.5");
+                double teste2 = double.Parse("2,5");*/
 
-                for (int x = 0; x < txtVisor.TextLength; x++)
-                {
-                    vetorValores[x] = txtVisor.Text[x];
-                }
-
-                // JULIA EU VIREI O CORINGA AQUI
-                // EU NAO SEI PROGRAMAR MAIS!!!!!!!!!!!!!
-
-                for (byte i = 0; i < txtVisor.TextLength; i++)
-                {
-                    if ("1234567890".Contains(txtVisor.Text[i]))
-                    {
-                        byte contador = 0;
-                        byte ajuda = 0;
-                        //vetorValores[i] = txtVisor.Text[i];
-                        numero += txtVisor.Text[i];
-
-                        contador = i;
-
-                        if (".".Contains(txtVisor.Text[++contador]))
-                        {
-                            numero += txtVisor.Text[contador];
-
-                            ajuda = contador;
-
-                            // AQUI NÃO TÁ PEGANDO O ÚLTIMO NUMERO POR Q SE TIRAR O AJUDA <, ELE VAI TENTAR PROCURAR EM UM INDICE MAIOR Q O TAMANHO DO VETOR
-                            while ("1234567890".Contains(txtVisor.Text[++ajuda]) && (ajuda < (txtVisor.TextLength-1)))
-                            {
-                                numero += txtVisor.Text[ajuda];
-                            }
-
-                            /*while ("1234567890".Contains(txtVisor.Text[++contador]))
-                            {
-                                numero += txtVisor.Text[contador];
-                            }*/
-
-                            //i = ++contador;
-                            i = ajuda;
-                        }
-                    }
-                }
-
-                
-                vetorNumeros = new char[numero.Length];
-                string socorro = "";
-
-                /*for (byte y = 0; y < vetorValores.Length; y++)
-                {
-                    if ("0123456789".Contains(vetorValores[y]))
-                    {
-                        byte sla = y;
-                        if (".".Contains(vetorValores[sla++]))
-                        {
-                            socorro += vetorValores[y]+".";
-
-                            while ("0123456789".Contains(vetorValores[sla]))
-                            {
-                                socorro += vetorValores[sla];
-                                sla++;
-                            }
-                        }
-                        else
-                        {
-                            socorro += vetorValores[y];
-                        }
-                    }
-                }
-
-                foreach (Char indice in numero)
-                    vetorNumeros[contador++] = indice;
-
-
-                vetorLetras = new int[contador];*/
+                /*string expressaoLetras = txtVisor.Text;
+                FormarExpressaoInfixa(expressaoLetras);*/
 
             }
             else
@@ -276,20 +264,23 @@ namespace pilhaCalculadora
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void frmCalculadora_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExpo_Click_1(object sender, EventArgs e)
         {
             char numero = (sender as Button).Text[0];
-            txtVisor.Text += numero;
+                txtVisor.Text += numero;
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             txtVisor.Clear();
+        }
+
+        private void txtVisor_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Não deixar o usuário utilizar a tecla 'space'
+
+            if (e.KeyCode == Keys.Space)
+                e.SuppressKeyPress = true;
         }
     }
 }
