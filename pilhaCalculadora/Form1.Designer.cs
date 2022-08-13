@@ -77,18 +77,18 @@
             this.lbSequencias.AutoSize = true;
             this.lbSequencias.Location = new System.Drawing.Point(12, 88);
             this.lbSequencias.Name = "lbSequencias";
-            this.lbSequencias.Size = new System.Drawing.Size(98, 18);
+            this.lbSequencias.Size = new System.Drawing.Size(107, 18);
             this.lbSequencias.TabIndex = 2;
-            this.lbSequencias.Text = "posfixa/infixa";
+            this.lbSequencias.Text = "Infixa/Pósfixa: ";
             // 
             // btnExpo
             // 
             this.btnExpo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExpo.Location = new System.Drawing.Point(13, 132);
+            this.btnExpo.Location = new System.Drawing.Point(14, 130);
             this.btnExpo.Name = "btnExpo";
-            this.btnExpo.Size = new System.Drawing.Size(97, 45);
+            this.btnExpo.Size = new System.Drawing.Size(85, 45);
             this.btnExpo.TabIndex = 3;
             this.btnExpo.Text = "^";
             this.btnExpo.UseVisualStyleBackColor = true;
@@ -99,9 +99,9 @@
             this.btnDivisao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDivisao.Location = new System.Drawing.Point(116, 132);
+            this.btnDivisao.Location = new System.Drawing.Point(117, 130);
             this.btnDivisao.Name = "btnDivisao";
-            this.btnDivisao.Size = new System.Drawing.Size(97, 45);
+            this.btnDivisao.Size = new System.Drawing.Size(85, 45);
             this.btnDivisao.TabIndex = 4;
             this.btnDivisao.Text = "/";
             this.btnDivisao.UseVisualStyleBackColor = true;
@@ -112,9 +112,9 @@
             this.btnMultiplicacao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMultiplicacao.Location = new System.Drawing.Point(219, 132);
+            this.btnMultiplicacao.Location = new System.Drawing.Point(220, 130);
             this.btnMultiplicacao.Name = "btnMultiplicacao";
-            this.btnMultiplicacao.Size = new System.Drawing.Size(97, 45);
+            this.btnMultiplicacao.Size = new System.Drawing.Size(85, 45);
             this.btnMultiplicacao.TabIndex = 5;
             this.btnMultiplicacao.Text = "*";
             this.btnMultiplicacao.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@
             this.btnSubtracao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubtracao.Location = new System.Drawing.Point(322, 132);
+            this.btnSubtracao.Location = new System.Drawing.Point(323, 130);
             this.btnSubtracao.Name = "btnSubtracao";
-            this.btnSubtracao.Size = new System.Drawing.Size(97, 45);
+            this.btnSubtracao.Size = new System.Drawing.Size(85, 45);
             this.btnSubtracao.TabIndex = 6;
             this.btnSubtracao.Text = "-";
             this.btnSubtracao.UseVisualStyleBackColor = true;
@@ -138,9 +138,9 @@
             this.btnSete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSete.Location = new System.Drawing.Point(13, 183);
+            this.btnSete.Location = new System.Drawing.Point(14, 181);
             this.btnSete.Name = "btnSete";
-            this.btnSete.Size = new System.Drawing.Size(97, 45);
+            this.btnSete.Size = new System.Drawing.Size(85, 45);
             this.btnSete.TabIndex = 7;
             this.btnSete.Text = "7";
             this.btnSete.UseVisualStyleBackColor = true;
@@ -151,9 +151,9 @@
             this.btnOito.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOito.Location = new System.Drawing.Point(116, 183);
+            this.btnOito.Location = new System.Drawing.Point(117, 181);
             this.btnOito.Name = "btnOito";
-            this.btnOito.Size = new System.Drawing.Size(97, 45);
+            this.btnOito.Size = new System.Drawing.Size(85, 45);
             this.btnOito.TabIndex = 8;
             this.btnOito.Text = "8";
             this.btnOito.UseVisualStyleBackColor = true;
@@ -164,9 +164,9 @@
             this.btnNove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNove.Location = new System.Drawing.Point(219, 183);
+            this.btnNove.Location = new System.Drawing.Point(220, 181);
             this.btnNove.Name = "btnNove";
-            this.btnNove.Size = new System.Drawing.Size(97, 45);
+            this.btnNove.Size = new System.Drawing.Size(85, 45);
             this.btnNove.TabIndex = 9;
             this.btnNove.Text = "9";
             this.btnNove.UseVisualStyleBackColor = true;
@@ -177,9 +177,9 @@
             this.btnSoma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSoma.Location = new System.Drawing.Point(322, 183);
+            this.btnSoma.Location = new System.Drawing.Point(323, 181);
             this.btnSoma.Name = "btnSoma";
-            this.btnSoma.Size = new System.Drawing.Size(97, 45);
+            this.btnSoma.Size = new System.Drawing.Size(85, 45);
             this.btnSoma.TabIndex = 10;
             this.btnSoma.Text = "+";
             this.btnSoma.UseVisualStyleBackColor = true;
@@ -190,9 +190,9 @@
             this.btnQuatro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQuatro.Location = new System.Drawing.Point(13, 234);
+            this.btnQuatro.Location = new System.Drawing.Point(14, 232);
             this.btnQuatro.Name = "btnQuatro";
-            this.btnQuatro.Size = new System.Drawing.Size(97, 45);
+            this.btnQuatro.Size = new System.Drawing.Size(85, 45);
             this.btnQuatro.TabIndex = 11;
             this.btnQuatro.Text = "4";
             this.btnQuatro.UseVisualStyleBackColor = true;
@@ -203,9 +203,9 @@
             this.btnCinco.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCinco.Location = new System.Drawing.Point(116, 234);
+            this.btnCinco.Location = new System.Drawing.Point(117, 232);
             this.btnCinco.Name = "btnCinco";
-            this.btnCinco.Size = new System.Drawing.Size(97, 45);
+            this.btnCinco.Size = new System.Drawing.Size(85, 45);
             this.btnCinco.TabIndex = 12;
             this.btnCinco.Text = "5";
             this.btnCinco.UseVisualStyleBackColor = true;
@@ -216,9 +216,9 @@
             this.btnSeis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeis.Location = new System.Drawing.Point(219, 234);
+            this.btnSeis.Location = new System.Drawing.Point(220, 232);
             this.btnSeis.Name = "btnSeis";
-            this.btnSeis.Size = new System.Drawing.Size(97, 45);
+            this.btnSeis.Size = new System.Drawing.Size(85, 45);
             this.btnSeis.TabIndex = 13;
             this.btnSeis.Text = "6";
             this.btnSeis.UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@
             this.btnDecimal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDecimal.Location = new System.Drawing.Point(322, 234);
+            this.btnDecimal.Location = new System.Drawing.Point(323, 232);
             this.btnDecimal.Name = "btnDecimal";
-            this.btnDecimal.Size = new System.Drawing.Size(97, 45);
+            this.btnDecimal.Size = new System.Drawing.Size(85, 45);
             this.btnDecimal.TabIndex = 14;
             this.btnDecimal.Text = ".";
             this.btnDecimal.UseVisualStyleBackColor = true;
@@ -242,9 +242,9 @@
             this.btnUm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUm.Location = new System.Drawing.Point(13, 285);
+            this.btnUm.Location = new System.Drawing.Point(14, 283);
             this.btnUm.Name = "btnUm";
-            this.btnUm.Size = new System.Drawing.Size(97, 45);
+            this.btnUm.Size = new System.Drawing.Size(85, 45);
             this.btnUm.TabIndex = 15;
             this.btnUm.Text = "1";
             this.btnUm.UseVisualStyleBackColor = true;
@@ -255,9 +255,9 @@
             this.btnDois.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDois.Location = new System.Drawing.Point(116, 285);
+            this.btnDois.Location = new System.Drawing.Point(117, 283);
             this.btnDois.Name = "btnDois";
-            this.btnDois.Size = new System.Drawing.Size(97, 45);
+            this.btnDois.Size = new System.Drawing.Size(85, 45);
             this.btnDois.TabIndex = 16;
             this.btnDois.Text = "2";
             this.btnDois.UseVisualStyleBackColor = true;
@@ -268,9 +268,9 @@
             this.btnTres.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTres.Location = new System.Drawing.Point(219, 285);
+            this.btnTres.Location = new System.Drawing.Point(220, 283);
             this.btnTres.Name = "btnTres";
-            this.btnTres.Size = new System.Drawing.Size(97, 45);
+            this.btnTres.Size = new System.Drawing.Size(85, 45);
             this.btnTres.TabIndex = 17;
             this.btnTres.Text = "3";
             this.btnTres.UseVisualStyleBackColor = true;
@@ -281,9 +281,9 @@
             this.btnFechaParenteses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFechaParenteses.Location = new System.Drawing.Point(322, 285);
+            this.btnFechaParenteses.Location = new System.Drawing.Point(323, 283);
             this.btnFechaParenteses.Name = "btnFechaParenteses";
-            this.btnFechaParenteses.Size = new System.Drawing.Size(97, 45);
+            this.btnFechaParenteses.Size = new System.Drawing.Size(85, 45);
             this.btnFechaParenteses.TabIndex = 18;
             this.btnFechaParenteses.Text = ")";
             this.btnFechaParenteses.UseVisualStyleBackColor = true;
@@ -294,9 +294,9 @@
             this.btnZero.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnZero.Location = new System.Drawing.Point(13, 336);
+            this.btnZero.Location = new System.Drawing.Point(14, 334);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(97, 45);
+            this.btnZero.Size = new System.Drawing.Size(85, 45);
             this.btnZero.TabIndex = 19;
             this.btnZero.Text = "0";
             this.btnZero.UseVisualStyleBackColor = true;
@@ -307,9 +307,9 @@
             this.btnIgual.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIgual.Location = new System.Drawing.Point(116, 336);
+            this.btnIgual.Location = new System.Drawing.Point(117, 334);
             this.btnIgual.Name = "btnIgual";
-            this.btnIgual.Size = new System.Drawing.Size(97, 45);
+            this.btnIgual.Size = new System.Drawing.Size(85, 45);
             this.btnIgual.TabIndex = 20;
             this.btnIgual.Text = "=";
             this.btnIgual.UseVisualStyleBackColor = true;
@@ -320,9 +320,9 @@
             this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpar.Location = new System.Drawing.Point(219, 336);
+            this.btnLimpar.Location = new System.Drawing.Point(220, 334);
             this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(97, 45);
+            this.btnLimpar.Size = new System.Drawing.Size(85, 45);
             this.btnLimpar.TabIndex = 21;
             this.btnLimpar.Text = "C";
             this.btnLimpar.UseVisualStyleBackColor = true;
@@ -333,9 +333,9 @@
             this.btnAbreParenteses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAbreParenteses.Location = new System.Drawing.Point(322, 336);
+            this.btnAbreParenteses.Location = new System.Drawing.Point(323, 334);
             this.btnAbreParenteses.Name = "btnAbreParenteses";
-            this.btnAbreParenteses.Size = new System.Drawing.Size(97, 45);
+            this.btnAbreParenteses.Size = new System.Drawing.Size(85, 45);
             this.btnAbreParenteses.TabIndex = 22;
             this.btnAbreParenteses.Text = "(";
             this.btnAbreParenteses.UseVisualStyleBackColor = true;
@@ -345,7 +345,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Linen;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(429, 398);
             this.Controls.Add(this.btnAbreParenteses);
             this.Controls.Add(this.btnLimpar);

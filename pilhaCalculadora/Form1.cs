@@ -153,8 +153,9 @@ namespace pilhaCalculadora
 
         string ConverterInfixaParaPosfixa(string cadeiaLida)
         {
-            string resultado = " ";
+            string resultado = "";
             umaPilha = new PilhaLista<char>();
+            char operadorComMaiorPrecedencia = ' ';
 
             for (int x = 0; x < cadeiaLida.Length; x++)
             {
@@ -171,14 +172,31 @@ namespace pilhaCalculadora
                     {
                         // se o topo da pilha é "mais importante" que o simboloLido, desempilhamos o topo,
                         // colocando ele na expressão pós-fixa e empilhamos o simbolo lido
-                        if (umaPilha.OTopo() == '(')
-                            umaPilha.Desempilhar();
-                        else
-                            resultado += umaPilha.Desempilhar();
 
-                        umaPilha.Empilhar(simboloLido);
+                        operadorComMaiorPrecedencia = umaPilha.Desempilhar();
+
+                        if (operadorComMaiorPrecedencia != '(')
+                            resultado += operadorComMaiorPrecedencia;
+                        else
+                        {
+                            parar = true;
+                            umaPilha.Empilhar(operadorComMaiorPrecedencia);
+                        }
                     }
+
+                    if (simboloLido != ')' )
+                        umaPilha.Empilhar(simboloLido);
+                    else // fará isso QUANDO o Pilha[TOPO] = ‘(‘
+                        operadorComMaiorPrecedencia = umaPilha.Desempilhar();
+
                 }
+            }
+
+            while (!umaPilha.EstaVazia) // Descarrega a Pilha Para a Saída
+            {
+                operadorComMaiorPrecedencia = umaPilha.Desempilhar();
+                    if (operadorComMaiorPrecedencia != '(')
+                        resultado += operadorComMaiorPrecedencia;
             }
 
             return resultado;
@@ -242,22 +260,14 @@ namespace pilhaCalculadora
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
+
             // Verifica se a expressão está balanceada
             if (Balanceada())
             {
-                //string exp = "(5+8)*5+7^4";
-                //string exp1 = "(5.2+8)*5.2+7^4";
-                //string exp2 = "6+4*6^356+356";
-                //string expInfx = FormarExpressaoInfixa(exp);
-                //string expInfx2 = FormarExpressaoInfixa(exp2);
-                //string expInfx = FormarExpressaoInfixa(exp1);
+                string expressaoLetras = FormarExpressaoInfixa(txtVisor.Text);
+                string expressaoPosfixa = ConverterInfixaParaPosfixa(expressaoLetras);
 
-                /*double teste = double.Parse("2.5");
-                double teste2 = double.Parse("2,5");*/
-
-                /*string expressaoLetras = txtVisor.Text;
-                FormarExpressaoInfixa(expressaoLetras);*/
-
+                lbSequencias.Text += txtVisor.Text + " | " + expressaoPosfixa;
             }
             else
                 MessageBox.Show("A equação não está balanceada! Verifique os parênteses!", "Erro",
@@ -266,12 +276,13 @@ namespace pilhaCalculadora
 
         private void btnExpo_Click_1(object sender, EventArgs e)
         {
-            char numero = (sender as Button).Text[0];
-                txtVisor.Text += numero;
+            char button = (sender as Button).Text[0];
+                txtVisor.Text += button;
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            lbSequencias.Text = "Infixa/Pósfixa: ";
             txtVisor.Clear();
         }
 
