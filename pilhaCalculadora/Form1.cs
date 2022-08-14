@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace pilhaCalculadora
 {
@@ -20,9 +21,9 @@ namespace pilhaCalculadora
 
     public partial class frmCalculadora : Form
     {
+        List<double> numeros;
         PilhaLista<char> umaPilha;
-        char[] vetorValores;
-        int[] vetorLetras;
+        PilhaLista<double> pilhaValor;
 
         public frmCalculadora()
         {
@@ -31,20 +32,43 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
-            char ultimaLetra = ' ';
-
-            if (txtVisor.Text.Length != 0)
+            for (int z = 0; z < txtVisor.TextLength; z++)
             {
-                byte contador = 0;
-                ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
-
-                if (!"1234567890-+*/.()^ ".Contains(ultimaLetra))
+                if (!"1234567890-+*/.()^".Contains(txtVisor.Text[z]))
                 {
-                    txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
+                    // fazer apagar o bagui aqui deus
+
                     MessageBox.Show("Caractere inválido!", "Erro",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            //Regex regex = new Regex("[0123456879()^+*/.-]");
+
+            //if (txtVisor.Text.Length != 0)
+            //{
+            //}
+
+            //char ultimaLetra = ' ';
+
+            //if (txtVisor.Text.Length != 0)
+            //{
+            //    ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
+
+            //    if (!"1234567890-+*/.()^".Contains(ultimaLetra))
+            //    {
+            //        txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
+            //        MessageBox.Show("Caractere inválido!", "Erro",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+        }
+
+        void Limpar()
+        {
+            lbSequencias.Text = "Infixa/Pósfixa: ";
+            txtVisor.Clear();
+            txtResultado.Clear();
         }
 
         bool EhOperador(char simbolo)
@@ -145,10 +169,65 @@ namespace pilhaCalculadora
 
             if (pTopo < pSimboloLido)
                 return true;
-            else if (pTopo == pSimboloLido)
+
+            else if (pTopo == pSimboloLido && pTopo != 1)
                 return true;
 
             return false;
+        }
+
+        double ValorDaSubExpressao(double op1, char simbol, double op2)
+        {
+            double resultado = 0;
+
+            switch (simbol)
+            {
+                // Talvez fazer uma classe calculadora?
+
+                case '+':
+                    resultado = op1 + op2;
+                    break;
+
+                case '-':
+                    resultado = op1 - op2;
+                    break;
+
+                case '*':
+                    resultado = op1 * op2;
+                    break;
+
+                case '/':
+                    resultado = op1 / op2;
+                    break;
+
+                case '^':
+                    resultado = Math.Pow(op1, op2);
+                    break;
+            }
+
+            return resultado;
+        }
+
+        double ValorDaExpressaoPosfixa(string cadeiaPosfixa)
+        {
+            pilhaValor = new PilhaLista<double>();
+
+            for (int i = 0; i < cadeiaPosfixa.Length; i++)
+            {
+                char simbol = cadeiaPosfixa[i];
+
+                if (!EhOperador(simbol))
+                    pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);
+                else
+                {
+                    double operando2 = pilhaValor.Desempilhar();
+                    double operando1 = pilhaValor.Desempilhar();
+                    double valor = ValorDaSubExpressao(operando1, simbol, operando2);
+                    pilhaValor.Empilhar(valor);
+                }
+            }
+
+            return pilhaValor.Desempilhar();
         }
 
         string ConverterInfixaParaPosfixa(string cadeiaLida)
@@ -179,12 +258,14 @@ namespace pilhaCalculadora
                             resultado += operadorComMaiorPrecedencia;
                         else
                         {
+                            //if (operadorComMaiorPrecedencia != '^')
                             parar = true;
+
                             umaPilha.Empilhar(operadorComMaiorPrecedencia);
                         }
                     }
 
-                    if (simboloLido != ')' )
+                    if (simboloLido != ')')
                         umaPilha.Empilhar(simboloLido);
                     else // fará isso QUANDO o Pilha[TOPO] = ‘(‘
                         operadorComMaiorPrecedencia = umaPilha.Desempilhar();
@@ -195,8 +276,8 @@ namespace pilhaCalculadora
             while (!umaPilha.EstaVazia) // Descarrega a Pilha Para a Saída
             {
                 operadorComMaiorPrecedencia = umaPilha.Desempilhar();
-                    if (operadorComMaiorPrecedencia != '(')
-                        resultado += operadorComMaiorPrecedencia;
+                if (operadorComMaiorPrecedencia != '(')
+                    resultado += operadorComMaiorPrecedencia;
             }
 
             return resultado;
@@ -205,7 +286,7 @@ namespace pilhaCalculadora
         private string FormarExpressaoInfixa(string expressao)
         {
             string expInfx = "";                      // string que será retornada, contendo a expressão infixa com números ao invés de letras
-            List<double> numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
+            numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
 
             // percorre a expressão passada como parâmetro
             for (byte i = 0; i < expressao.Length; i++)
@@ -267,23 +348,28 @@ namespace pilhaCalculadora
                 string expressaoLetras = FormarExpressaoInfixa(txtVisor.Text);
                 string expressaoPosfixa = ConverterInfixaParaPosfixa(expressaoLetras);
 
+                txtResultado.Text += ValorDaExpressaoPosfixa(expressaoPosfixa);
+
                 lbSequencias.Text += txtVisor.Text + " | " + expressaoPosfixa;
             }
             else
-                MessageBox.Show("A equação não está balanceada! Verifique os parênteses!", "Erro",
+            {
+                Limpar();
+
+                MessageBox.Show("A equação não está correta! Verifique os parênteses e os números", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnExpo_Click_1(object sender, EventArgs e)
         {
             char button = (sender as Button).Text[0];
-                txtVisor.Text += button;
+            txtVisor.Text += button;
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            lbSequencias.Text = "Infixa/Pósfixa: ";
-            txtVisor.Clear();
+            Limpar();
         }
 
         private void txtVisor_KeyDown(object sender, KeyEventArgs e)
@@ -292,6 +378,15 @@ namespace pilhaCalculadora
 
             if (e.KeyCode == Keys.Space)
                 e.SuppressKeyPress = true;
+
+            /*if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    MessageBox.Show("Caractere inválido!", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }*/
         }
     }
 }
