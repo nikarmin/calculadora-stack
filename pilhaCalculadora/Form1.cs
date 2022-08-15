@@ -32,16 +32,24 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
-            for (int z = 0; z < txtVisor.TextLength; z++)
+            if (txtVisor.Text.Length >= 0)
             {
-                if (!"1234567890-+*/.()^".Contains(txtVisor.Text[z]))
+                if (!"1234567890-+*/.()^".Contains(txtVisor.Text))
                 {
-                    // fazer apagar o bagui aqui deus
 
-                    MessageBox.Show("Caractere inválido!", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            //for (byte z = 0; z < txtVisor.TextLength; z++)
+            //{
+            //    if (!"1234567890-+*/.()^".Contains(txtVisor.Text[z]))
+            //    {
+            //        MessageBox.Show("Caractere inválido!", "Erro",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            //        Limpar();
+            //    }
+            //}
 
             //Regex regex = new Regex("[0123456879()^+*/.-]");
 
@@ -383,10 +391,56 @@ namespace pilhaCalculadora
             {
                 if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
                 {
-                    MessageBox.Show("Caractere inválido!", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (((Control.ModifierKeys & Keys.Shift) != Keys.Shift) &&
+                        ((Control.ModifierKeys & Keys.Back) != Keys.Back))
+                    {
+                        if (e.KeyCode != Keys.D0 &&
+                            e.KeyCode != Keys.D8 &&
+                            e.KeyCode != Keys.Subtract &&
+                            e.KeyCode != Keys.Add &&
+                            e.KeyCode != Keys.OemMinus)
+                        {
+                            MessageBox.Show("Caractere inválido!", "Erro",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                    }
                 }
             }*/
+
+            /*if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+                {
+                    if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                    {
+                        MessageBox.Show("Caractere inválido!", "Erro",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }*/
+
+            /*if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    if (((Control.ModifierKeys & Keys.Shift) != Keys.Shift) && 
+                        ((Control.ModifierKeys & Keys.Back) != Keys.Back) &&
+                        (e.KeyCode >= Keys.D8 || e.KeyCode > Keys.D) && 
+                        (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9))
+                        MessageBox.Show("Caractere inválido!", "Erro",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }*/
+
+            /* if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+             {
+                 if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                 {
+                     MessageBox.Show("Caractere inválido!", "Erro",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 }
+             }*/
         }
     }
 }
