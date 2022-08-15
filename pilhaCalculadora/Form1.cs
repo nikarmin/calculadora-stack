@@ -32,13 +32,14 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
-            if (txtVisor.Text.Length >= 0)
-            {
-                if (!"1234567890-+*/.()^".Contains(txtVisor.Text))
-                {
-
-                }
-            }
+            //if (txtVisor.Text.Length > 0)
+            //{
+            //    if (!"1234567890-+*/.()^".Contains(txtVisor.Text[txtVisor.TextLength-1]))
+            //    {
+            //        MessageBox.Show("Caractere inválido!", "Erro",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
 
             //for (byte z = 0; z < txtVisor.TextLength; z++)
             //{
@@ -169,7 +170,10 @@ namespace pilhaCalculadora
 
             return precedencia;
         }
-
+        bool ehUnario()
+        {
+            return false;
+        }
         bool TemPrecedencia(char topo, char simboloLido)
         {
             byte pTopo = VerificarValorDePrecedencia(topo);
@@ -302,9 +306,12 @@ namespace pilhaCalculadora
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
                 {
+                    //if (expressao[i] != 0)
+                    //{
+                    //    if (expressao[i-1])
+                    //}
                     expInfx += expressao[i]; // adicionamos ele na expressão infixa
                 }
-
                 else // número ou ponto
                 {
                     string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
@@ -349,7 +356,6 @@ namespace pilhaCalculadora
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
-
             // Verifica se a expressão está balanceada
             if (Balanceada())
             {
@@ -441,6 +447,16 @@ namespace pilhaCalculadora
                          MessageBoxButtons.OK, MessageBoxIcon.Error);
                  }
              }*/
+        }
+
+        private void txtVisor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsNumber(e.KeyChar) && !"+-*/.()".Contains(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Caractere inválido!", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -62,6 +62,7 @@
             this.txtVisor.TabIndex = 0;
             this.txtVisor.TextChanged += new System.EventHandler(this.txtVisor_TextChanged);
             this.txtVisor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVisor_KeyDown);
+            this.txtVisor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVisor_KeyPress);
             // 
             // txtResultado
             // 
