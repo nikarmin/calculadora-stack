@@ -161,6 +161,7 @@ namespace pilhaCalculadora
                     break;
                 case '+':
                 case '-':
+                //case '@':
                     precedencia = 3;
                     break;
                 case ')':
@@ -255,6 +256,10 @@ namespace pilhaCalculadora
                 if (!EhOperador(simboloLido))
                     resultado += simboloLido;
                 // OPERADOR
+                /*else if (simboloLido == '@')
+                {
+                    resultado += simboloLido;
+                }*/
                 else
                 {
                     bool parar = false;
@@ -300,9 +305,13 @@ namespace pilhaCalculadora
             string expInfx = "";                      // string que será retornada, contendo a expressão infixa com números ao invés de letras
             numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
 
+            string operando = "";
+
             // percorre a expressão passada como parâmetro
             for (byte i = 0; i < expressao.Length; i++)
             {
+                
+
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
                 {
@@ -310,11 +319,46 @@ namespace pilhaCalculadora
                     //{
                     //    if (expressao[i-1])
                     //}
-                    expInfx += expressao[i]; // adicionamos ele na expressão infixa
+
+                    // CORINGUEIIIIIIIIIIIIIIIIIII AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+
+                    /*if (i == 0 && (expressao[i] == '-'))
+                        operando += expressao[0];
+
+                    else if (expressao[i] == '(')
+                    {
+                        expInfx += expressao[i];
+
+                        byte contador = i;
+
+                        if (expressao[++contador] == '-')
+                        {
+                            while (!EhOperador(expressao[++contador]))
+                            {
+                                operando += expressao[contador];
+                                //contador++;
+                            }
+                            i = --contador;
+                        }*/
+                            //operando += expressao[contador];
+
+                        /*else
+                        {
+                            while (expressao[contador] != ')')
+                            {
+
+                                contador++;
+                            }
+
+                        }
+
+                    }
+                    else*/
+                        expInfx += expressao[i]; // adicionamos ele na expressão infixa
                 }
                 else // número ou ponto
                 {
-                    string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
+                    //string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
                                           // pois o operando pode ser composto por mais de um número (ex: 134) ou pode ser um decimal
                                           // (ex: 12.45) então, temos que verificar se temos mais números depois desse que vão compor
                                           // esse operando
@@ -343,11 +387,15 @@ namespace pilhaCalculadora
 
                     double numero = double.Parse(operando);
 
+                    if ("-".Contains(numero.ToString()))
+                        expInfx += '@';
+
                     if (!numeros.Contains(numero))
                         numeros.Add(numero);
 
-                    expInfx += (char)(65 + numeros.IndexOf(numero));
+                     expInfx += (char)(65 + numeros.IndexOf(numero));
 
+                    operando = "";
                 }
             }
 
@@ -392,71 +440,21 @@ namespace pilhaCalculadora
 
             if (e.KeyCode == Keys.Space)
                 e.SuppressKeyPress = true;
-
-            /*if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-            {
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    if (((Control.ModifierKeys & Keys.Shift) != Keys.Shift) &&
-                        ((Control.ModifierKeys & Keys.Back) != Keys.Back))
-                    {
-                        if (e.KeyCode != Keys.D0 &&
-                            e.KeyCode != Keys.D8 &&
-                            e.KeyCode != Keys.Subtract &&
-                            e.KeyCode != Keys.Add &&
-                            e.KeyCode != Keys.OemMinus)
-                        {
-                            MessageBox.Show("Caractere inválido!", "Erro",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        }
-                    }
-                }
-            }*/
-
-            /*if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-            {
-                if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-                {
-                    if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                    {
-                        MessageBox.Show("Caractere inválido!", "Erro",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }*/
-
-            /*if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-            {
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    if (((Control.ModifierKeys & Keys.Shift) != Keys.Shift) && 
-                        ((Control.ModifierKeys & Keys.Back) != Keys.Back) &&
-                        (e.KeyCode >= Keys.D8 || e.KeyCode > Keys.D) && 
-                        (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9))
-                        MessageBox.Show("Caractere inválido!", "Erro",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }*/
-
-            /* if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-             {
-                 if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                 {
-                     MessageBox.Show("Caractere inválido!", "Erro",
-                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 }
-             }*/
         }
 
         private void txtVisor_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsNumber(e.KeyChar) && !"+-*/.()".Contains(e.KeyChar))
+            if(!char.IsNumber(e.KeyChar) && !"+-*/.()^".Contains(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 MessageBox.Show("Caractere inválido!", "Erro",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtVisor_Click(object sender, EventArgs e)
+        {
+            Limpar();
         }
     }
 }
