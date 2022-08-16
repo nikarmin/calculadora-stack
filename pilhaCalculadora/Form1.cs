@@ -32,45 +32,6 @@ namespace pilhaCalculadora
 
         private void txtVisor_TextChanged(object sender, EventArgs e)
         {
-            //if (txtVisor.Text.Length > 0)
-            //{
-            //    if (!"1234567890-+*/.()^".Contains(txtVisor.Text[txtVisor.TextLength-1]))
-            //    {
-            //        MessageBox.Show("Caractere inválido!", "Erro",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
-
-            //for (byte z = 0; z < txtVisor.TextLength; z++)
-            //{
-            //    if (!"1234567890-+*/.()^".Contains(txtVisor.Text[z]))
-            //    {
-            //        MessageBox.Show("Caractere inválido!", "Erro",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            //        Limpar();
-            //    }
-            //}
-
-            //Regex regex = new Regex("[0123456879()^+*/.-]");
-
-            //if (txtVisor.Text.Length != 0)
-            //{
-            //}
-
-            //char ultimaLetra = ' ';
-
-            //if (txtVisor.Text.Length != 0)
-            //{
-            //    ultimaLetra = txtVisor.Text[txtVisor.TextLength - 1];
-
-            //    if (!"1234567890-+*/.()^".Contains(ultimaLetra))
-            //    {
-            //        txtVisor.Text = txtVisor.Text.Substring(0, txtVisor.Text.Length - 1);
-            //        MessageBox.Show("Caractere inválido!", "Erro",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
         }
 
         void Limpar()
@@ -94,6 +55,12 @@ namespace pilhaCalculadora
             PilhaLista<char> pilhaBalanceamento = new PilhaLista<char>();
             string expressao = txtVisor.Text;
             bool estaBalanceada = true;
+
+            if (!"0123456789/*-+".Contains(expressao))
+            {
+                estaBalanceada = false;
+                return estaBalanceada;
+            }
 
             // Percorremos a expressão, pegando cada caractere
             for (int i = 0; i < expressao.Length && estaBalanceada; i++)
@@ -161,7 +128,7 @@ namespace pilhaCalculadora
                     break;
                 case '+':
                 case '-':
-                //case '@':
+                case '@':
                     precedencia = 3;
                     break;
                 case ')':
@@ -230,7 +197,8 @@ namespace pilhaCalculadora
                 char simbol = cadeiaPosfixa[i];
 
                 if (!EhOperador(simbol))
-                    pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);
+                   pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);
+                    
                 else
                 {
                     double operando2 = pilhaValor.Desempilhar();
@@ -256,12 +224,11 @@ namespace pilhaCalculadora
                 if (!EhOperador(simboloLido))
                     resultado += simboloLido;
                 // OPERADOR
-                /*else if (simboloLido == '@')
-                {
-                    resultado += simboloLido;
-                }*/
                 else
                 {
+                    //if (x == 0 && cadeiaLida[x] == '-')
+                    //    simboloLido = '@';
+
                     bool parar = false;
 
                     while (!parar && !umaPilha.EstaVazia && TemPrecedencia(umaPilha.OTopo(), simboloLido))
@@ -275,9 +242,7 @@ namespace pilhaCalculadora
                             resultado += operadorComMaiorPrecedencia;
                         else
                         {
-                            //if (operadorComMaiorPrecedencia != '^')
                             parar = true;
-
                             umaPilha.Empilhar(operadorComMaiorPrecedencia);
                         }
                     }
@@ -305,60 +270,17 @@ namespace pilhaCalculadora
             string expInfx = "";                      // string que será retornada, contendo a expressão infixa com números ao invés de letras
             numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
 
-            string operando = "";
-
             // percorre a expressão passada como parâmetro
             for (byte i = 0; i < expressao.Length; i++)
             {
-                
-
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
                 {
-                    //if (expressao[i] != 0)
-                    //{
-                    //    if (expressao[i-1])
-                    //}
-
-                    // CORINGUEIIIIIIIIIIIIIIIIIII AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-
-                    /*if (i == 0 && (expressao[i] == '-'))
-                        operando += expressao[0];
-
-                    else if (expressao[i] == '(')
-                    {
-                        expInfx += expressao[i];
-
-                        byte contador = i;
-
-                        if (expressao[++contador] == '-')
-                        {
-                            while (!EhOperador(expressao[++contador]))
-                            {
-                                operando += expressao[contador];
-                                //contador++;
-                            }
-                            i = --contador;
-                        }*/
-                            //operando += expressao[contador];
-
-                        /*else
-                        {
-                            while (expressao[contador] != ')')
-                            {
-
-                                contador++;
-                            }
-
-                        }
-
-                    }
-                    else*/
                         expInfx += expressao[i]; // adicionamos ele na expressão infixa
                 }
                 else // número ou ponto
                 {
-                    //string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
+                    string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
                                           // pois o operando pode ser composto por mais de um número (ex: 134) ou pode ser um decimal
                                           // (ex: 12.45) então, temos que verificar se temos mais números depois desse que vão compor
                                           // esse operando
@@ -387,15 +309,10 @@ namespace pilhaCalculadora
 
                     double numero = double.Parse(operando);
 
-                    if ("-".Contains(numero.ToString()))
-                        expInfx += '@';
-
                     if (!numeros.Contains(numero))
                         numeros.Add(numero);
 
                      expInfx += (char)(65 + numeros.IndexOf(numero));
-
-                    operando = "";
                 }
             }
 
@@ -444,6 +361,8 @@ namespace pilhaCalculadora
 
         private void txtVisor_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Permitir que o usuário digite números, operadores e segurar o shift.
+
             if(!char.IsNumber(e.KeyChar) && !"+-*/.()^".Contains(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
