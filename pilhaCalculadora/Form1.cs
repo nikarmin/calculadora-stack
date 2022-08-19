@@ -43,7 +43,7 @@ namespace pilhaCalculadora
 
         bool EhOperador(char simbolo)
         {
-            if ("/*-+()^".Contains(simbolo))
+            if ("/*-+()^@#".Contains(simbolo)) // não sei se deveríamos colocar o @ aqui
                 return true;
             else
                 return false;
@@ -55,12 +55,12 @@ namespace pilhaCalculadora
             PilhaLista<char> pilhaBalanceamento = new PilhaLista<char>();
             string expressao = txtVisor.Text;
             bool estaBalanceada = true;
-
+/*
             if (!"0123456789/*-+".Contains(expressao))
             {
                 estaBalanceada = false;
                 return estaBalanceada;
-            }
+            }*/
 
             // Percorremos a expressão, pegando cada caractere
             for (int i = 0; i < expressao.Length && estaBalanceada; i++)
@@ -119,20 +119,23 @@ namespace pilhaCalculadora
                 case '(':
                     precedencia = 0;
                     break;
-                case '^':
+                case '@':
+                case '#': // # pode ser o + unário
                     precedencia = 1;
+                    break;
+                case '^':
+                    precedencia = 2;
                     break;
                 case '*':
                 case '/':
-                    precedencia = 2;
+                    precedencia = 3;
                     break;
                 case '+':
                 case '-':
-                case '@':
-                    precedencia = 3;
+                    precedencia = 4;
                     break;
                 case ')':
-                    precedencia = 4;
+                    precedencia = 5;
                     break;
             }
 
@@ -197,14 +200,20 @@ namespace pilhaCalculadora
                 char simbol = cadeiaPosfixa[i];
 
                 if (!EhOperador(simbol))
-                   pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);
-                    
+                   pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);           
                 else
                 {
-                    double operando2 = pilhaValor.Desempilhar();
-                    double operando1 = pilhaValor.Desempilhar();
-                    double valor = ValorDaSubExpressao(operando1, simbol, operando2);
-                    pilhaValor.Empilhar(valor);
+                    if (simbol == '@')
+                        pilhaValor.Empilhar(-pilhaValor.Desempilhar());
+                    else if (simbol == '#')
+                        pilhaValor.Empilhar(pilhaValor.Desempilhar()); // como que fala literalmente pra ele n fazer nada? fica ai o questionamento
+                    else
+                    {
+                        double operando2 = pilhaValor.Desempilhar();
+                        double operando1 = pilhaValor.Desempilhar();
+                        double valor = ValorDaSubExpressao(operando1, simbol, operando2);
+                        pilhaValor.Empilhar(valor);
+                    }
                 }
             }
 
@@ -236,7 +245,7 @@ namespace pilhaCalculadora
                         // se o topo da pilha é "mais importante" que o simboloLido, desempilhamos o topo,
                         // colocando ele na expressão pós-fixa e empilhamos o simbolo lido
 
-                        operadorComMaiorPrecedencia = umaPilha.Desempilhar();
+                         operadorComMaiorPrecedencia = umaPilha.Desempilhar();
 
                         if (operadorComMaiorPrecedencia != '(')
                             resultado += operadorComMaiorPrecedencia;
@@ -267,7 +276,7 @@ namespace pilhaCalculadora
 
         private string FormarExpressaoInfixa(string expressao)
         {
-            string expInfx = "";                      // string que será retornada, contendo a expressão infixa com números ao invés de letras
+            string expInfx = "";          // string que será retornada, contendo a expressão infixa com números ao invés de letras
             numeros = new List<double>(); // vetor de doubles que vai guardar os operandos da expressão
 
             // percorre a expressão passada como parâmetro
@@ -276,6 +285,16 @@ namespace pilhaCalculadora
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
                 {
+                    if (expressao[i] == '(' || expressao[i] == ')')
+                        expInfx += expressao[i];
+                    else if (i == 0 || !char.IsDigit(expressao[i - 1]) || !char.IsDigit(expressao[i + 1])) // ta errado pq o usuário pode fazer merda e ai pode pegar indice n existente no vetor (digitar um menoszinho no fim da expressão q dlç)
+                    {
+                        if (expressao[i] == '-')
+                                expInfx += '@';
+                        else if (expressao[i] == '+') 
+                            expInfx += '#';
+                    }
+                    else
                         expInfx += expressao[i]; // adicionamos ele na expressão infixa
                 }
                 else // número ou ponto

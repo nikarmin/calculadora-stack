@@ -20,3 +20,24 @@ D:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculado
 D:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.CoreCompileInputs.cache
 D:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.exe
 D:\Cotuca\Técnico2022\INI41 - EstD II - Chicão\pilhaCalculadora\pilhaCalculadora\obj\Debug\pilhaCalculadora.pdb
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe.config
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.pdb
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.AssemblyReference.cache
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.frmCalculadora.resources
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.Properties.Resources.resources
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.GenerateResource.cache
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.CoreCompileInputs.cache
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.exe
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.pdb
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe.config
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.exe
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\bin\Debug\pilhaCalculadora.pdb
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.AssemblyReference.cache
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.SuggestedBindingRedirects.cache
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.frmCalculadora.resources
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.Properties.Resources.resources
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.GenerateResource.cache
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.CoreCompileInputs.cache
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.exe
+D:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.pdb
