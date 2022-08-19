@@ -60,8 +60,8 @@
             this.txtVisor.Name = "txtVisor";
             this.txtVisor.Size = new System.Drawing.Size(401, 26);
             this.txtVisor.TabIndex = 0;
-            this.txtVisor.Click += new System.EventHandler(this.txtVisor_Click);
             this.txtVisor.TextChanged += new System.EventHandler(this.txtVisor_TextChanged);
+            this.txtVisor.DoubleClick += new System.EventHandler(this.txtVisor_DoubleClick);
             this.txtVisor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVisor_KeyDown);
             this.txtVisor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVisor_KeyPress);
             // 
@@ -316,7 +316,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCalculadora";
             this.Text = "Calculadora";
-            this.Click += new System.EventHandler(this.btnExpo_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

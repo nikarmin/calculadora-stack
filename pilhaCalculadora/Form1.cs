@@ -55,13 +55,19 @@ namespace pilhaCalculadora
             PilhaLista<char> pilhaBalanceamento = new PilhaLista<char>();
             string expressao = txtVisor.Text;
             bool estaBalanceada = true;
-/*
+            /*
+            for (int i = 0; i < expressao.Length; i++)
+            {
+                if (!"0123456789/*-+.".Contains(expressao[i]))
+
+            }
+
             if (!"0123456789/*-+".Contains(expressao))
             {
                 estaBalanceada = false;
                 return estaBalanceada;
-            }*/
-
+            }
+*/
             // Percorremos a expressão, pegando cada caractere
             for (int i = 0; i < expressao.Length && estaBalanceada; i++)
             {
@@ -141,10 +147,6 @@ namespace pilhaCalculadora
 
             return precedencia;
         }
-        bool ehUnario()
-        {
-            return false;
-        }
         bool TemPrecedencia(char topo, char simboloLido)
         {
             byte pTopo = VerificarValorDePrecedencia(topo);
@@ -153,7 +155,7 @@ namespace pilhaCalculadora
             if (pTopo < pSimboloLido)
                 return true;
 
-            else if (pTopo == pSimboloLido && pTopo != 1)
+            else if (pTopo == pSimboloLido && pTopo != 1 && pTopo != 2)
                 return true;
 
             return false;
@@ -184,7 +186,10 @@ namespace pilhaCalculadora
                     break;
 
                 case '^':
-                    resultado = Math.Pow(op1, op2);
+                    if (op1 < 0 && op2 < 0 || op1 < 0)
+                        resultado = -Math.Pow(op1, op2);
+                    else
+                        resultado = Math.Pow(op1, op2);
                     break;
             }
 
@@ -216,6 +221,14 @@ namespace pilhaCalculadora
                     }
                 }
             }
+
+            /*while (!pilhaValor.EstaVazia)
+            {
+                var numero = pilhaValor.Desempilhar();
+                var numeroDois = pilhaValor.Desempilhar();
+
+
+            }*/
 
             return pilhaValor.Desempilhar();
         }
@@ -285,17 +298,45 @@ namespace pilhaCalculadora
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
                 {
+                    bool ehUnario = false;
+                    if (i == 0)
+                        // é unário
+                        ehUnario = true;
+                    else if (i == expressao.Length - 1)
+                        throw new Exception("Expressao inválida");
+                    else if (!char.IsNumber(expressao[i-1]))
+                        // é unario
+                        ehUnario = true;
+
+                    if (ehUnario)
+                    {
+                        if (expressao[i] == '-')
+                            expInfx += '@';
+                        else if (expressao[i] == '+')
+                            expInfx += '#';
+                        else
+                           throw new Exception("Expressao inválida");
+                    }
+                    else
+                        expInfx += expressao[i];
+
+                    /*
                     if (expressao[i] == '(' || expressao[i] == ')')
                         expInfx += expressao[i];
                     else if (i == 0 || !char.IsDigit(expressao[i - 1]) || !char.IsDigit(expressao[i + 1])) // ta errado pq o usuário pode fazer merda e ai pode pegar indice n existente no vetor (digitar um menoszinho no fim da expressão q dlç)
                     {
                         if (expressao[i] == '-')
                                 expInfx += '@';
+
                         else if (expressao[i] == '+') 
                             expInfx += '#';
+
+                        else
+                            expInfx += expressao[i];
                     }
                     else
                         expInfx += expressao[i]; // adicionamos ele na expressão infixa
+                    */
                 }
                 else // número ou ponto
                 {
@@ -340,7 +381,7 @@ namespace pilhaCalculadora
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            // Verifica se a expressão está balanceada
+            // Verifica se a expressão -está balanceada
             if (Balanceada())
             {
                 string expressaoLetras = FormarExpressaoInfixa(txtVisor.Text);
@@ -348,7 +389,10 @@ namespace pilhaCalculadora
 
                 txtResultado.Text += ValorDaExpressaoPosfixa(expressaoPosfixa);
 
-                lbSequencias.Text += txtVisor.Text + " | " + expressaoPosfixa;
+                var ok = expressaoLetras.Replace('@', '-').Replace('#', '+');
+                var notOk = expressaoPosfixa.Replace('@', '-').Replace('#', '+');
+
+                lbSequencias.Text += ok + " | " + notOk;
             }
             else
             {
@@ -391,6 +435,11 @@ namespace pilhaCalculadora
         }
 
         private void txtVisor_Click(object sender, EventArgs e)
+        {
+            Limpar();
+        }
+
+        private void txtVisor_DoubleClick(object sender, EventArgs e)
         {
             Limpar();
         }
