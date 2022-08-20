@@ -376,7 +376,7 @@ namespace pilhaCalculadora
                 {
                     // limpamos a tela e alertamos o usuário
                     Limpar();
-                    MessageBox.Show("A expressão está incorreta!", "Erro",
+                    MessageBox.Show("Verifique os parenteses e se há pelo menos um operador!", "Expressão incorreta",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
@@ -385,7 +385,7 @@ namespace pilhaCalculadora
             {
                 // limpamos a tela e alertamos o usuário
                 Limpar();
-                MessageBox.Show("A expressão está incorreta!", "Erro",
+                MessageBox.Show("Verifique os parênteses e se há pelo menos um operador!", "Expressão incorreta",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -416,6 +416,12 @@ namespace pilhaCalculadora
                 e.Handled = true;
                 MessageBox.Show("Caractere inválido!", "Erro",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (e.KeyChar == 13)
+            {
+                btnIgual.PerformClick();
+                e.Handled = true; 
             }
         }
 
