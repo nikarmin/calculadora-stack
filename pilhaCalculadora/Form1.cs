@@ -186,10 +186,18 @@ namespace pilhaCalculadora
                     break;
 
                 case '^':
+                    if (op1 > 0) 
+                    {
+                        return Math.Pow(op1, op2);
+                    }
+
+                    return -1 * Math.Pow(-op1, op2);
+                    /*
                     if (op1 < 0 && op2 < 0 || op1 < 0)
                         resultado = -Math.Pow(op1, op2);
                     else
                         resultado = Math.Pow(op1, op2);
+                    */
                     break;
             }
 
@@ -211,7 +219,7 @@ namespace pilhaCalculadora
                     if (simbol == '@')
                         pilhaValor.Empilhar(-pilhaValor.Desempilhar());
                     else if (simbol == '#')
-                        pilhaValor.Empilhar(pilhaValor.Desempilhar()); // como que fala literalmente pra ele n fazer nada? fica ai o questionamento
+                        pilhaValor.Empilhar(pilhaValor.Desempilhar());
                     else
                     {
                         double operando2 = pilhaValor.Desempilhar();
@@ -226,8 +234,6 @@ namespace pilhaCalculadora
             {
                 var numero = pilhaValor.Desempilhar();
                 var numeroDois = pilhaValor.Desempilhar();
-
-
             }*/
 
             return pilhaValor.Desempilhar();
@@ -248,9 +254,6 @@ namespace pilhaCalculadora
                 // OPERADOR
                 else
                 {
-                    //if (x == 0 && cadeiaLida[x] == '-')
-                    //    simboloLido = '@';
-
                     bool parar = false;
 
                     while (!parar && !umaPilha.EstaVazia && TemPrecedencia(umaPilha.OTopo(), simboloLido))
@@ -299,14 +302,17 @@ namespace pilhaCalculadora
                 if (EhOperador(expressao[i]))
                 {
                     bool ehUnario = false;
-                    if (i == 0)
-                        // é unário
-                        ehUnario = true;
-                    else if (i == expressao.Length - 1)
-                        throw new Exception("Expressao inválida");
-                    else if (!char.IsNumber(expressao[i-1]))
-                        // é unario
-                        ehUnario = true;
+                    if (expressao[i] != '(' && expressao[i] != ')')
+                    {
+                        if (i == 0)
+                            // é unário
+                            ehUnario = true;
+                        else if (i == expressao.Length - 1)
+                            throw new Exception("Expressao inválida");
+                        else if (!char.IsNumber(expressao[i - 1]))
+                            // é unario
+                            ehUnario = true;
+                    }
 
                     if (ehUnario)
                     {
@@ -315,7 +321,7 @@ namespace pilhaCalculadora
                         else if (expressao[i] == '+')
                             expInfx += '#';
                         else
-                           throw new Exception("Expressao inválida");
+                            throw new Exception("Expressao inválida");
                     }
                     else
                         expInfx += expressao[i];
@@ -387,12 +393,12 @@ namespace pilhaCalculadora
                 string expressaoLetras = FormarExpressaoInfixa(txtVisor.Text);
                 string expressaoPosfixa = ConverterInfixaParaPosfixa(expressaoLetras);
 
-                txtResultado.Text += ValorDaExpressaoPosfixa(expressaoPosfixa);
+                txtResultado.Text = ValorDaExpressaoPosfixa(expressaoPosfixa) + "";
 
-                var ok = expressaoLetras.Replace('@', '-').Replace('#', '+');
-                var notOk = expressaoPosfixa.Replace('@', '-').Replace('#', '+');
+                var expInfx  = expressaoLetras.Replace('@', '-').Replace('#', '+');
+                var expPosfx = expressaoPosfixa.Replace('@', '-').Replace('#', '+');
 
-                lbSequencias.Text += ok + " | " + notOk;
+                lbSequencias.Text = "Infixa/Pósfixa: " + expInfx + " | " + expPosfx;
             }
             else
             {
