@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace pilhaCalculadora
 {
@@ -21,19 +15,16 @@ namespace pilhaCalculadora
 
     public partial class frmCalculadora : Form
     {
-        List<double> numeros;
-        PilhaLista<char> umaPilha;
-        PilhaLista<double> pilhaValor;
+        List<double> numeros;          // lista dos operadores da expressão
+        PilhaLista<char> umaPilha;     // pilha que auxilia a formar a expressão posfixa
+        PilhaLista<double> pilhaValor; // pilha para calcular o valor da expressão
 
         public frmCalculadora()
         {
             InitializeComponent();
         }
 
-        private void txtVisor_TextChanged(object sender, EventArgs e)
-        {
-        }
-
+        // método para limpar a tela, tirar todas as alterações
         void Limpar()
         {
             lbSequencias.Text = "Infixa/Pósfixa: ";
@@ -41,46 +32,37 @@ namespace pilhaCalculadora
             txtResultado.Clear();
         }
 
+        // verifica se o simbolo passado como parâmetro é um operador
         bool EhOperador(char simbolo)
         {
-            if ("/*-+()^@#".Contains(simbolo)) // não sei se deveríamos colocar o @ aqui
-                return true;
-            else
-                return false;
+            // se o simbolo está contido na string "/*-+()^@#", ele é operador
+            if ("/*-+()^@#".Contains(simbolo))
+                return true; // então, retornamos true
+            else // se não está contido
+                return false; // retornamos false
         }
 
+        // verifica se a expressão está balanceada
         bool Balanceada()
         {
-            // Criamos uma pilha para poder verificar o balanceamento
+            // criamos uma pilha para poder verificar o balanceamento
             PilhaLista<char> pilhaBalanceamento = new PilhaLista<char>();
             string expressao = txtVisor.Text;
             bool estaBalanceada = true;
-            /*
-            for (int i = 0; i < expressao.Length; i++)
-            {
-                if (!"0123456789/*-+.".Contains(expressao[i]))
 
-            }
-
-            if (!"0123456789/*-+".Contains(expressao))
-            {
-                estaBalanceada = false;
-                return estaBalanceada;
-            }
-*/
-            // Percorremos a expressão, pegando cada caractere
+            // percorremos a expressão, pegando cada caractere
             for (int i = 0; i < expressao.Length && estaBalanceada; i++)
             {
                 char caracterLido = expressao[i];
 
-                // Se for uma abertura, empilhamos
+                // se for uma abertura, empilhamos
                 if (caracterLido == '(')
                     pilhaBalanceamento.Empilhar(caracterLido);
 
                 else if (caracterLido == ')')
                 {
 
-                    // Se for um fechamento, e a pilha está vazia, indica que não temos a abertura deste fechamento,
+                    // se for um fechamento, e a pilha está vazia, indica que não temos a abertura deste fechamento,
                     // portanto, indica que não está balanceada
                     if (pilhaBalanceamento.EstaVazia)
                         estaBalanceada = false;
@@ -90,7 +72,7 @@ namespace pilhaCalculadora
 
                         try
                         {
-                            // Se não, tiramos o '(' da pilha, indicando que 'combinou'
+                            // se não, tiramos o '(' da pilha, indicando que 'combinou'
                             aberturaAnterior = pilhaBalanceamento.Desempilhar();
                         }
                         catch (Exception ex)
@@ -99,23 +81,22 @@ namespace pilhaCalculadora
                         }
                     }
                 }
-
-                // SE NUM FOR PARÊNTESES TÁ TUDO OK, AFINAL, ELE DISSE PRA BALANCEAR SÓ OS (((((((())))))))))))
                 else
                     estaBalanceada = true;
             }
 
-            // Se a pilha não estiver vazia, significa que algum caractere sobrou, indicando que não está balanceada
+            // se a pilha não estiver vazia, significa que algum caractere sobrou, indicando que não está balanceada
             if (!pilhaBalanceamento.EstaVazia)
                 estaBalanceada = false;
 
-            // Se está balanceada e a pilha está vazia, a expressão está balanceada
+            // se está balanceada e a pilha está vazia, a expressão está balanceada
             if (estaBalanceada && pilhaBalanceamento.EstaVazia)
                 estaBalanceada = true;
 
             return estaBalanceada;
         }
 
+        // define o valor de precedência do símbolo passado como parâmetro
         byte VerificarValorDePrecedencia(char simbolo)
         {
             byte precedencia = 0;
@@ -125,8 +106,8 @@ namespace pilhaCalculadora
                 case '(':
                     precedencia = 0;
                     break;
-                case '@':
-                case '#': // # pode ser o + unário
+                case '@': // @ é o - unário
+                case '#': // # é o + unário
                     precedencia = 1;
                     break;
                 case '^':
@@ -147,14 +128,19 @@ namespace pilhaCalculadora
 
             return precedencia;
         }
+
+        // verifica se o primeiro simbolo tem precedencia sobre o segundo
         bool TemPrecedencia(char topo, char simboloLido)
         {
-            byte pTopo = VerificarValorDePrecedencia(topo);
-            byte pSimboloLido = VerificarValorDePrecedencia(simboloLido);
+            byte pTopo = VerificarValorDePrecedencia(topo);               // pTopo recebe o valor de precedencia do simbolo do topo da pilha
+            byte pSimboloLido = VerificarValorDePrecedencia(simboloLido); // pSimboloLido recebe o valor de precedencia do simbolo lido
 
+            // se o valor de precedencia do simbolo do topo for menor que o do simbolo lido, o simbolo do topo tem maior precedência
             if (pTopo < pSimboloLido)
                 return true;
-
+            // se os dois simbolos tem o mesmo valor de precedencia, o simbolo que vem primeiro na expressao tem maior precedencia, ou seja,
+            // o simbolo do topo da pilha (pois ele foi lido antes). isso só não acontece com os unários (precedencia 1) e com o operador de
+            // potenciação (precedencia = 2)
             else if (pTopo == pSimboloLido && pTopo != 1 && pTopo != 2)
                 return true;
 
@@ -165,10 +151,9 @@ namespace pilhaCalculadora
         {
             double resultado = 0;
 
+            // o simbolo é o operador, que determina qual a operação a ser feita
             switch (simbol)
             {
-                // Talvez fazer uma classe calculadora?
-
                 case '+':
                     resultado = op1 + op2;
                     break;
@@ -190,14 +175,7 @@ namespace pilhaCalculadora
                     {
                         return Math.Pow(op1, op2);
                     }
-
                     return -1 * Math.Pow(-op1, op2);
-                    /*
-                    if (op1 < 0 && op2 < 0 || op1 < 0)
-                        resultado = -Math.Pow(op1, op2);
-                    else
-                        resultado = Math.Pow(op1, op2);
-                    */
                     break;
             }
 
@@ -206,37 +184,37 @@ namespace pilhaCalculadora
 
         double ValorDaExpressaoPosfixa(string cadeiaPosfixa)
         {
-            pilhaValor = new PilhaLista<double>();
+            pilhaValor = new PilhaLista<double>(); // pilha que vai guardar o valor da expressão
 
+            // percorremos a expressao posfixa
             for (int i = 0; i < cadeiaPosfixa.Length; i++)
             {
                 char simbol = cadeiaPosfixa[i];
 
+                // se for não for operador, empilhamos na pilha de valor
                 if (!EhOperador(simbol))
                    pilhaValor.Empilhar(numeros[(int)(simbol - 'A')]);           
                 else
                 {
+                    // se o simbolo for @ (menos unário), a pilha deverá guardar o valor oposto ao que ela está guardando
                     if (simbol == '@')
                         pilhaValor.Empilhar(-pilhaValor.Desempilhar());
+                    // se o simbolo for + (mais unário), nada deverá ser alterado
                     else if (simbol == '#')
-                        pilhaValor.Empilhar(pilhaValor.Desempilhar());
+                        continue;
+                    // se tivermos um operador binário
                     else
                     {
+                        // pegamos os dois operandos guardados na pilha
                         double operando2 = pilhaValor.Desempilhar();
                         double operando1 = pilhaValor.Desempilhar();
-                        double valor = ValorDaSubExpressao(operando1, simbol, operando2);
-                        pilhaValor.Empilhar(valor);
+                        double valor = ValorDaSubExpressao(operando1, simbol, operando2); // realizamos a operação indicada pelo operador binário
+                        pilhaValor.Empilhar(valor); // empilhamos o resultado na pilhaValor
                     }
                 }
             }
 
-            /*while (!pilhaValor.EstaVazia)
-            {
-                var numero = pilhaValor.Desempilhar();
-                var numeroDois = pilhaValor.Desempilhar();
-            }*/
-
-            return pilhaValor.Desempilhar();
+            return pilhaValor.Desempilhar(); // retornamos o resultado, guardado na pilhaValor
         }
 
         string ConverterInfixaParaPosfixa(string cadeiaLida)
@@ -248,10 +226,10 @@ namespace pilhaCalculadora
             for (int x = 0; x < cadeiaLida.Length; x++)
             {
                 char simboloLido = cadeiaLida[x];
-                // OPERANDO
+                // operando
                 if (!EhOperador(simboloLido))
                     resultado += simboloLido;
-                // OPERADOR
+                // operador
                 else
                 {
                     bool parar = false;
@@ -260,7 +238,6 @@ namespace pilhaCalculadora
                     {
                         // se o topo da pilha é "mais importante" que o simboloLido, desempilhamos o topo,
                         // colocando ele na expressão pós-fixa e empilhamos o simbolo lido
-
                          operadorComMaiorPrecedencia = umaPilha.Desempilhar();
 
                         if (operadorComMaiorPrecedencia != '(')
@@ -280,7 +257,7 @@ namespace pilhaCalculadora
                 }
             }
 
-            while (!umaPilha.EstaVazia) // Descarrega a Pilha Para a Saída
+            while (!umaPilha.EstaVazia) // descarrega a pilha para a saída
             {
                 operadorComMaiorPrecedencia = umaPilha.Desempilhar();
                 if (operadorComMaiorPrecedencia != '(')
@@ -300,22 +277,29 @@ namespace pilhaCalculadora
             {
                 // se o caracter analisado é operador
                 if (EhOperador(expressao[i]))
-                {
+                { 
                     bool ehUnario = false;
+                    // se o char for - ou +, vamos analisar se ele é unário
                     if (expressao[i] != '(' && expressao[i] != ')')
                     {
-                        if (i == 0)
+                        // se o char analisado é o primeiro a aparecer na string 
+                        if (i == 0) 
                             // é unário
                             ehUnario = true;
+                        // se ele for o último a aparecer na string, a expressão é inválida
                         else if (i == expressao.Length - 1)
                             throw new Exception("Expressao inválida");
-                        else if (!char.IsNumber(expressao[i - 1]))
+                        // se o char que vem antes não é um operando 
+                        else if (expressao[i-1] != ')' && !char.IsNumber(expressao[i - 1]))
                             // é unario
                             ehUnario = true;
                     }
 
+                    // se for unário
                     if (ehUnario)
                     {
+                        // verificamos se é o menos ou o mais unários e substituimos eles por caracteres especiais para
+                        // identificá-los mais tarde, na hora de realizar a conta
                         if (expressao[i] == '-')
                             expInfx += '@';
                         else if (expressao[i] == '+')
@@ -323,38 +307,18 @@ namespace pilhaCalculadora
                         else
                             throw new Exception("Expressao inválida");
                     }
-                    else
-                        expInfx += expressao[i];
-
-                    /*
-                    if (expressao[i] == '(' || expressao[i] == ')')
-                        expInfx += expressao[i];
-                    else if (i == 0 || !char.IsDigit(expressao[i - 1]) || !char.IsDigit(expressao[i + 1])) // ta errado pq o usuário pode fazer merda e ai pode pegar indice n existente no vetor (digitar um menoszinho no fim da expressão q dlç)
-                    {
-                        if (expressao[i] == '-')
-                                expInfx += '@';
-
-                        else if (expressao[i] == '+') 
-                            expInfx += '#';
-
-                        else
-                            expInfx += expressao[i];
-                    }
-                    else
-                        expInfx += expressao[i]; // adicionamos ele na expressão infixa
-                    */
+                    else // se não for unário
+                        expInfx += expressao[i]; // apenas adicionamos na expressão
                 }
                 else // número ou ponto
                 {
                     string operando = ""; // a string operando começa vazia, vamos verificar os chars que vem depois do número encontrado
-                                          // pois o operando pode ser composto por mais de um número (ex: 134) ou pode ser um decimal
-                                          // (ex: 12.45) então, temos que verificar se temos mais números depois desse que vão compor
+                                          // pois o operando pode ser composto por mais de um número (ex: 134), também podendo ser um decimal
+                                          // (ex: 12.45) então, temos que verificar se temos mais números depois desse, números que vão compor
                                           // esse operando
 
                     // vamos percorrer a expressão a partir de onde paramos até achar um operador, 
-                    // quando acharmos um operador quer dizer que o 'operando' acabou --- problema: mas e se for o último número da expressão? - até achar o operando ou até terminar a string
-                    // ai n vamos ter um último operador, e se a expressão acabar com um operador? (um parenteses) - só copia
-                    // e se a expressão tiver um operador unário?
+                    // quando acharmos um operador quer dizer que o 'operando' acabou 
                     byte c = i;
 
                     while (c != expressao.Length && !EhOperador(expressao[c]))
@@ -368,17 +332,20 @@ namespace pilhaCalculadora
                         c++;
                     }
 
-                    // Se o operando tiver um índice maior que 1, ou seja, é composto por +1 número
-                    // Temos que fazer com que o for continue a percorrer até onde ele pegou os números
+                    // se o operando tiver um índice maior que 1, ou seja, é composto por +1 número
+                    // temos que fazer com que o for continue a percorrer até onde ele pegou os números
                     if (operando.Length > 1)
                         i = --c;
 
-                    double numero = double.Parse(operando);
+                    double numero = double.Parse(operando); // transformamos a string operando em double
 
+                    // se esse operando ainda não foi guardado na lista de operandos, guardamos ele lá
+                    // (não guardamos operandos repetidos para que cada operanod tenha uma letra exclusiva)
                     if (!numeros.Contains(numero))
                         numeros.Add(numero);
 
-                     expInfx += (char)(65 + numeros.IndexOf(numero));
+                    // adicionamos a letra correspondente ao operando na expInfx
+                    expInfx += (char)(65 + numeros.IndexOf(numero));
                 }
             }
 
@@ -387,24 +354,38 @@ namespace pilhaCalculadora
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            // Verifica se a expressão -está balanceada
-            if (Balanceada())
+            string expressaoLida = txtVisor.Text; // pegamos a expressao digitada no txtVisor
+
+            // verifica se a expressão está balanceada e contém pelo menos um operador
+            if (Balanceada() && expressaoLida.IndexOfAny("+-/*^".ToCharArray()) != -1)
             {
-                string expressaoLetras = FormarExpressaoInfixa(txtVisor.Text);
-                string expressaoPosfixa = ConverterInfixaParaPosfixa(expressaoLetras);
+                try
+                {
+                    string expInfixLetras = FormarExpressaoInfixa(expressaoLida);       // formamos a expressão infixa com letras ao invés de números
+                    string expPosfixLetras = ConverterInfixaParaPosfixa(expInfixLetras); // formamos a expressão posfixa a partir da infixa
 
-                txtResultado.Text = ValorDaExpressaoPosfixa(expressaoPosfixa) + "";
+                    txtResultado.Text = ValorDaExpressaoPosfixa(expPosfixLetras) + "";   // calculamos o valor da expressão e exibimos ele no txtResultado
 
-                var expInfx  = expressaoLetras.Replace('@', '-').Replace('#', '+');
-                var expPosfx = expressaoPosfixa.Replace('@', '-').Replace('#', '+');
+                    // substituimos os "@" e "#", que representam o mais e o menos unários, por "-" e "+"
+                    var expInfx = expInfixLetras.Replace('@', '-').Replace('#', '+');
+                    var expPosfx = expPosfixLetras.Replace('@', '-').Replace('#', '+');
 
-                lbSequencias.Text = "Infixa/Pósfixa: " + expInfx + " | " + expPosfx;
+                    lbSequencias.Text = "Infixa/Pósfixa: " + expInfx + " | " + expPosfx;  // exibimos as expressões no lbSequencias  
+                }
+                catch (Exception expressaoInvalida)
+                {
+                    // limpamos a tela e alertamos o usuário
+                    Limpar();
+                    MessageBox.Show("A expressão está incorreta!", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
-            else
+            else // se a expressão está incorreta
             {
+                // limpamos a tela e alertamos o usuário
                 Limpar();
-
-                MessageBox.Show("A equação não está correta! Verifique os parênteses e os números", "Erro",
+                MessageBox.Show("A expressão está incorreta!", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -422,27 +403,20 @@ namespace pilhaCalculadora
 
         private void txtVisor_KeyDown(object sender, KeyEventArgs e)
         {
-            // Não deixar o usuário utilizar a tecla 'space'
-
+            // impede o usuário de utilizar a tecla 'space'
             if (e.KeyCode == Keys.Space)
                 e.SuppressKeyPress = true;
         }
 
         private void txtVisor_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir que o usuário digite números, operadores e segurar o shift.
-
+            // permite que o usuário digite apenas números, operadores e teclas de controle
             if(!char.IsNumber(e.KeyChar) && !"+-*/.()^".Contains(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 MessageBox.Show("Caractere inválido!", "Erro",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void txtVisor_Click(object sender, EventArgs e)
-        {
-            Limpar();
         }
 
         private void txtVisor_DoubleClick(object sender, EventArgs e)
