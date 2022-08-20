@@ -172,10 +172,9 @@ namespace pilhaCalculadora
 
                 case '^':
                     if (op1 > 0) 
-                    {
-                        return Math.Pow(op1, op2);
-                    }
-                    return -1 * Math.Pow(-op1, op2);
+                        resultado = Math.Pow(op1, op2);
+                    else
+                        resultado = -1 * Math.Pow(-op1, op2);
                     break;
             }
 
