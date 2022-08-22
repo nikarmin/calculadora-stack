@@ -108,21 +108,19 @@ namespace pilhaCalculadora
                     break;
                 case '@': // @ é o - unário
                 case '#': // # é o + unário
-                    precedencia = 1;
-                    break;
                 case '^':
-                    precedencia = 2;
+                    precedencia = 1;
                     break;
                 case '*':
                 case '/':
-                    precedencia = 3;
+                    precedencia = 2;
                     break;
                 case '+':
                 case '-':
-                    precedencia = 4;
+                    precedencia = 3;
                     break;
                 case ')':
-                    precedencia = 5;
+                    precedencia = 4;
                     break;
             }
 
@@ -141,7 +139,7 @@ namespace pilhaCalculadora
             // se os dois simbolos tem o mesmo valor de precedencia, o simbolo que vem primeiro na expressao tem maior precedencia, ou seja,
             // o simbolo do topo da pilha (pois ele foi lido antes). isso só não acontece com os unários (precedencia 1) e com o operador de
             // potenciação (precedencia = 2)
-            else if (pTopo == pSimboloLido && pTopo != 1 && pTopo != 2)
+            else if (pTopo == pSimboloLido && pTopo != 1)
                 return true;
 
             return false;
@@ -180,38 +178,6 @@ namespace pilhaCalculadora
                         resultado = Math.Pow(op1, op2);
                     else
                         resultado = -1 * Math.Pow(-op1, op2);
-
-                    /*if (op1 < 0)
-                    {
-                        if (op2 > 0 && (op2 % 2 == 0))
-                            resultado = Math.Pow(op1, op2);
-                        else if (op2 % 2 != 0)
-                            resultado = -1 * Math.Pow(-op1, op2);
-                        else
-                            resultado = Math.Pow(op1, op2);
-                    }
-                    else
-                    {
-                        if (op2 > 0 && (op2 % 2 == 0))
-                            resultado = Math.Pow(op1, op2);
-                        else
-                            resultado = -1 * Math.Pow(-op1, op2);
-                    }*/
-
-                    /*if (op1 < 0 && (op2 % 2 == 0))
-                        resultado = Math.Pow(op1, op2);
-                    else
-                        resultado = -1 * Math.Pow(-op1, op2);
-
-                    if (op1 < 0 && op2 < 0 && (op2 % 2 == 0))
-                        resultado = Math.Pow(op1, op2);
-                    else
-                        resultado = -1 * Math.Pow(-op1, op2);*/
-
-                    /*if (op1 > 0) 
-                        resultado = Math.Pow(op1, op2);
-                    else
-                        resultado = -1 * Math.Pow(-op1, op2);*/
                     break;
             }
 
@@ -319,16 +285,23 @@ namespace pilhaCalculadora
                     if (expressao[i] != '(' && expressao[i] != ')')
                     {
                         // se o char analisado é o primeiro a aparecer na string 
-                        if (i == 0) 
+                        if (i == 0)
                             // é unário
                             ehUnario = true;
                         // se ele for o último a aparecer na string, a expressão é inválida
                         else if (i == expressao.Length - 1)
                             throw new Exception("Expressao inválida");
                         // se o char que vem antes não é um operando 
-                        else if (expressao[i-1] != ')' && !char.IsNumber(expressao[i - 1]))
+                        else if (expressao[i - 1] != ')' && !char.IsNumber(expressao[i - 1]))
                             // é unario
                             ehUnario = true;
+                    }
+                    else if (expressao[i] == '(') 
+                    {
+                        // quando o usuário digitar um operando seguido de um abre parenteses, sem um operador no meio,
+                        // interpretamos a operação como multiplicação ex: 10(2) --- 10*(2)
+                        if (i != 0 && char.IsNumber(expressao[i - 1]))
+                            expInfx += '*';
                     }
 
                     // se for unário

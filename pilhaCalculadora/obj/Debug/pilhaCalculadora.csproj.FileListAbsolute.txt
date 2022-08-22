@@ -51,3 +51,4 @@ C:\Users\claud\OneDrive\Imagens\COTUCA\INFO\4° SEMESTRE\Estrutura de Dados II\P
 C:\Users\claud\OneDrive\Imagens\COTUCA\INFO\4° SEMESTRE\Estrutura de Dados II\Projetos\Projeto I - Calculadora Stack\Repositorio\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.CoreCompileInputs.cache
 C:\Users\claud\OneDrive\Imagens\COTUCA\INFO\4° SEMESTRE\Estrutura de Dados II\Projetos\Projeto I - Calculadora Stack\Repositorio\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.exe
 C:\Users\claud\OneDrive\Imagens\COTUCA\INFO\4° SEMESTRE\Estrutura de Dados II\Projetos\Projeto I - Calculadora Stack\Repositorio\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.pdb
+E:\ini41\pilhaCalculadora\calculadora-stack\pilhaCalculadora\obj\Debug\pilhaCalculadora.csproj.SuggestedBindingRedirects.cache
