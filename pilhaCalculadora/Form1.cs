@@ -171,10 +171,47 @@ namespace pilhaCalculadora
                     break;
 
                 case '^':
-                    if (op1 > 0) 
+
+                    if ((op1 < 0 && op2 < 0) && op2 % 2 == 0)
+                        resultado = Math.Pow(op1, op2);
+                    else if ((op1 < 0 && op2 > 0) && op2 % 2 == 0)
+                        resultado = Math.Pow(op1, op2);
+                    else if (op1 > 0)
                         resultado = Math.Pow(op1, op2);
                     else
                         resultado = -1 * Math.Pow(-op1, op2);
+
+                    /*if (op1 < 0)
+                    {
+                        if (op2 > 0 && (op2 % 2 == 0))
+                            resultado = Math.Pow(op1, op2);
+                        else if (op2 % 2 != 0)
+                            resultado = -1 * Math.Pow(-op1, op2);
+                        else
+                            resultado = Math.Pow(op1, op2);
+                    }
+                    else
+                    {
+                        if (op2 > 0 && (op2 % 2 == 0))
+                            resultado = Math.Pow(op1, op2);
+                        else
+                            resultado = -1 * Math.Pow(-op1, op2);
+                    }*/
+
+                    /*if (op1 < 0 && (op2 % 2 == 0))
+                        resultado = Math.Pow(op1, op2);
+                    else
+                        resultado = -1 * Math.Pow(-op1, op2);
+
+                    if (op1 < 0 && op2 < 0 && (op2 % 2 == 0))
+                        resultado = Math.Pow(op1, op2);
+                    else
+                        resultado = -1 * Math.Pow(-op1, op2);*/
+
+                    /*if (op1 > 0) 
+                        resultado = Math.Pow(op1, op2);
+                    else
+                        resultado = -1 * Math.Pow(-op1, op2);*/
                     break;
             }
 
